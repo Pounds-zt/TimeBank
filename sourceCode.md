@@ -54,7 +54,20 @@ contract Time{
     }
         
 
-    enum ProjectState{ UNREVIEWED, UNSTRATED, UNDERWAY, FINISHED, CANCELED }
+    enum ProjectState{ UNREVIEWED, UNSTRATED, UNDERWAY, FINISHED, CANCELED }//未审核，未开始，进行中，结束，取消
+    
+    
+    struct joinUser{ 
+        //  报名参加的用户地址  
+        address joinAddress; 
+        //  报名参加日期 
+        bytes32 joinDate; 
+        //  该日期该日期的工时  
+        bytes32 joinDuration; 
+        //参加者的备注 
+        byte[] remark;  
+    } 
+    
     
     // 公益项目数据结构
     struct Project{
