@@ -1,6 +1,6 @@
 ```solidity
 pragma solidity ^0.4.22;
-
+123
 contract Time{
     // 发起者担保
     uint PROMOTERFROZEN=50;
