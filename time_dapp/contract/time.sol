@@ -15,8 +15,12 @@ contract Time{
     // 存储公益项目
     Project[] public projects;
     
+    //  未审核，待报名，正在报名，未开始，正在进行，已结束，已取消
+    enum ProjectState{ UNREVIEWED, UNSTRATED, UNDERWAY, FINISHED, CANCELED }
+    
     // 初始化函数 
     constructor(uint32 initalSupply) public {
+        //初始化默认账号
         User memory user = User({
             name:"0",
             password:"123456",
@@ -29,6 +33,33 @@ contract Time{
         });
         usersMap[msg.sender]=user;
         users.push(user);
+        uint[] memory account=new uint[](1);
+        bytes10 startDate;
+        bytes10 endDate;
+        joinUser[] memory joinUsers;
+        voteProject[] memory voteProjectApply;
+        voteProject[] memory voteProjectResult;
+        // 方便使用projects的ID当作下标查找，把下标为0的公益项目留出来
+        Project memory project1 = Project({
+            ID:0,
+            name:"预留项目",
+            state:ProjectState.FINISHED,
+            description:"",
+            account: account,
+            startDate:startDate,
+            endDate:endDate,
+            joinUsers:joinUsers,
+            voteProjectApply:voteProjectApply,
+            voteProjectResult:voteProjectResult
+        });
+        Project memory project;
+        project.ID=0;
+        project.name="预留项目";
+        project.state=ProjectState.FINISHED;
+        project.description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
+        projects.push(project1);
+        
+    
     }
     
     // 用户数据结构
@@ -51,7 +82,7 @@ contract Time{
         uint voteCount;
     }
     
-    enum ProjectState{ UNREVIEWED, UNSTRATED, UNDERWAY, FINISHED, CANCELED }
+    
     
     struct joinUser{
         //  报名参加的用户地址 
@@ -65,6 +96,7 @@ contract Time{
     //   审核员对项目申请\项目结果的投票
     struct voteProject{
         address voteReviewer;
+        // 1是通过，-1是不通过,0是该审核人没有投票
         uint voteResult;
     }
     
@@ -77,7 +109,7 @@ contract Time{
         // 公益项目状态
         ProjectState state;
         // 公益项目描述
-        byte[] description;
+        string description;
         // 公益项目招募人数
         uint[] account;
         // 公益项目开始日期
@@ -93,7 +125,19 @@ contract Time{
         voteProject[] voteProjectResult;
     }
     
+    // 审核人期望
+
+    //对公益项目进行审核，链上投票通过或不通过
+    // function setVoteProjectApply(uint ID,uint result){
+
+         
+    // }
     
+    function get() public view returns(string){
+        return projects[0].description;
+    }
+    
+
 }
 
 
