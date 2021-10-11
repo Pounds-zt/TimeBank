@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>高校成绩管理数据库系统</title>
+    <!--让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="viewport" content="width=device-width,initial-scale=0.9,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">-->
+    <link rel="stylesheet" href="../css/example.css">
+    <!--bootstrapCSS 文件-->
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <!--图标-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <!--表格-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.min.css">
+    <!--日历-->
+    <link rel="stylesheet" href="libs/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="libs/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <!-- 多选下拉框CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
+
+</head>
+
+<body>
+<div class="box">
+    <aside class="left-aside">
+        <div class="leftside-menu">
+            <!--标题-->
+            <div id="menu-header">
+                <div class="panel-collapse" id="menu0">
+                    <ul>
+                        <li>
+                            <a href="#tab0" data-toggle="tab" class="tag" id="tag0" id="menu-title">
+                                高校成绩管理数据库系统
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--主要内容-->
+            <div class="panel-group" id="menu-content">
+                <!--折叠组-->
+                <!--第一个折叠块-->
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="menu-content" href="#menu1">
+                        <div class="panel-heading" id="heading1">
+			                <span class="panel-title">
+			                    <i class="bi bi-people-fill"></i>&#160;&#160;&#160;&#160;menu1
+			                </span>
+                            <i class="bi bi-chevron-right arrowon" id="menu-arrow1"></i>
+                        </div>
+                    </a>
+                    <div class="panel-collapse" id="menu1">
+                        <ul id="myTab1">
+                            <li>
+                                <a href="#tab1" data-toggle="tab" class="tag" id="tag1">
+                                    <div class="panel-body">
+                                        <p>tag1</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab2" data-toggle="tab" class="tag" id="tag2">
+                                    <div class="panel-body">
+                                        <p>tag2</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab3" data-toggle="tab" class="tag" id="tag3">
+                                    <div class="panel-body">
+                                        <p>tag3</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--第二个折叠块-->
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="menu-content" href="#menu2">
+                        <div class="panel-heading" id="heading2">
+			                    <span class="panel-title">
+			                        <i class="bi bi-person-lines-fill"></i>&#160;&#160;&#160;&#160;menu2
+			                    </span>
+                            <i class="bi bi-chevron-right arrowon" id="menu-arrow2"></i>
+                        </div>
+                    </a>
+                    <div class="panel-collapse" id="menu2">
+                        <ul id="myTab2">
+                            <li>
+                                <a href="#tab4" data-toggle="tab" class="tag" id="tag4">
+                                    <div class="panel-body">
+                                        <p>tag4</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab5" data-toggle="tab" class="tag" id="tag5">
+                                    <div class="panel-body">
+                                        <p>tag5</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--第三个折叠块-->
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="menu-content" href="#menu3">
+                        <div class="panel-heading" id="heading3">
+			                <span class="panel-title">
+			                    <i class="bi bi-gear-fill"></i>&#160;&#160;&#160;&#160;menu3
+			                </span>
+                            <i class="bi bi-chevron-right arrowon" id="menu-arrow3"></i>
+                        </div>
+                    </a>
+                    <div class="panel-collapse" id="menu3">
+                        <ul id="myTab3">
+                            <li>
+                                <a href="#tab6" data-toggle="tab" class="tag" id="tag6">
+                                    <div class="panel-body">
+                                        <p>tag6</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab7" data-toggle="tab" class="tag" id="tag7">
+                                    <div class="panel-body">
+                                        <p>tag7</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </aside>
+    <aside class="right-aside">
+        <nav class="navbar navbar-default">
+            <div class="container" id="navbar-container">
+                <div class="navbar-header">
+                    <!--把navbar-collapse类的内容作为折叠组件显示-->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="#" id="menu-logo">
+                        <i class="bi bi-toggle-on" id="change-menu"></i>
+                    </a>
+                </div>
+                <div id="time">
+                    <i class="bi bi-clock"></i>
+                    <span id="displaydate"></span>
+                    <span id="displaytime"></span>
+                </div>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown" id="message">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <b id="bell"><i class="bi bi-bell-fill"></i></b>
+                                消息
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">系统通知</a></li>
+                                <li><a href="#">我的消息</a></li>
+                            </ul>
+                        </li>
+                        <li id="signout"><a href="index.jsp"><i class="bi bi-box-arrow-right"></i>退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="menu-detail1" class="menu-detail">
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="tab0">
+                    <div class="menu-header">
+                        tab0
+                    </div>
+                    <div class="menu-content">
+                        tab0
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="tab1">
+                    <div class="menu-header">
+                        tab1
+                    </div>
+                    <div class="menu-content">
+                        tab1
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab2">
+                    <div class="menu-header">
+                        tab2
+                    </div>
+                    <div class="menu-content">
+                        tab2
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="tab3">
+                    <div class="menu-header">
+                        tab3
+                    </div>
+                    <div class="menu-content">
+                        tab3
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab4">
+                    <div class="menu-header">
+                        tab4
+                    </div>
+                    <div class="menu-content">
+                        tab4
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab5">
+                    <div class="menu-header">
+                        tab5
+                    </div>
+                    <div class="menu-content">
+                        tab5
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab6">
+                    <div class="menu-header">
+                        tab6
+                    </div>
+                    <div class="menu-content">
+                        tab6
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab7">
+                    <div class="menu-header">
+                        tab7
+                    </div>
+                    <div class="menu-content">
+                        tab7
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </aside>
+
+
+</div>
+
+<section id="bottom">
+    版权所有© Copyright 2001-2021 ini软件股份有限公司 <a href="index.js">学生信息管理系统</a>
+    <address>
+        <i>
+            通讯地址:浙江工业大学屏峰校区&nbsp;&nbsp;
+            电话:(0577)15397011622&nbsp; &nbsp;
+            网管信箱:1187837559@qq.com
+        </i>
+    </address>
+</section>
+
+
+<!--错误提示模态框-->
+<div id="error">
+    <div id="error-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
+                        &times;
+                    </button>
+                    <div class="modal-title">
+                        <h4 class="modal-title" id="add-modal-label">
+                            错误信息
+                        </h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <span id="errorMessage">error</span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <!--data-dismiss="modal"可以设置关闭模态框-->
+                        <input type="button" value="确认" class="btn btn-primary btn-in" data-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+
+<!-- jQuery (Bootstrap 插件需要引入) -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!--二维码-->
+<script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<!-- 包含了所有编译插件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<!--表格-->
+<script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- 多选下拉框JavaScript -->
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select-locale-all.min.js"></script>
+<!--日历-->
+<script src="libs/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script src="libs/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<!--写入json的方法-->
+<script src="https://cdn.bootcss.com/FileSaver.js/1.3.8/FileSaver.js"></script>
+<!--js文件-->
+<script type="text/javascript" src="../js/example.js"></script>
+
+<script>
+
+</script>
+</html>
