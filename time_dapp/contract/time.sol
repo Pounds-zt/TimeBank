@@ -17,6 +17,8 @@ contract Time{
     // 存储举报
     Impeach[] impeachs;
     
+    Project aproject;
+    
     //  未审核，待报名，正在报名，未开始，正在进行，已结束，已取消
     enum ProjectState{ UNREVIEWED, UNSTRATED, UNDERWAY, FINISHED, CANCELED }
     
@@ -39,11 +41,11 @@ contract Time{
         // uint[] memory account=new uint[](1);
         // bytes10 startDate;
         // bytes10 endDate;
-        // joinUser[] joinUsers;
-        // voteProject[] voteProjectApply;
-        // voteProject[] voteProjectResult;
+        // joinUser[] memory joinUsers;
+        // voteProject[] memory voteProjectApply;
+        // voteProject[] memory voteProjectResult;
         // // 方便使用projects的ID当作下标查找，把下标为0的公益项目留出来
-        // Project memory project1 = Project({
+        // Project memory project = Project({
         //     ID:0,
         //     name:"预留项目",
         //     state:ProjectState.FINISHED,
@@ -55,22 +57,25 @@ contract Time{
         //     voteProjectApply:voteProjectApply,
         //     voteProjectResult:voteProjectResult
         // });
-        Project memory project;
-        project.ID=0;
-        project.name="预留项目";
-        project.state=ProjectState.FINISHED;
-        joinUser[] joinUsers;
-        joinUser joinUser1;
-        joinUsers.push(joinUser1);
-        project.joinUsers=joinUsers;
-        project.description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
-        projects.push(project);
+        //  projects.push(project);
         
-        //Project storage project;
-        // projects[1].ID=0;
-        // projects[1].name="预留项目";
-        // projects[1].state=ProjectState.FINISHED;
-        // projects[1].description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
+        // Project memory project;
+        // project.ID=0;
+        // project.name="预留项目";
+        // project.state=ProjectState.FINISHED;
+        // joinUser[] joinUsers;
+        // joinUser joinUser1;
+        // joinUsers.push(joinUser1);
+        // project.joinUsers=joinUsers;
+        // project.description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
+        // projects.push(project);
+        
+        Project memory project;
+        projects[0].ID=0;
+        projects[0].name="预留项目";
+        projects[0].state=ProjectState.FINISHED;
+        projects[0].description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
+        projects.push(project);
         
     
     }
@@ -102,8 +107,8 @@ contract Time{
         address joinAddress;
         //  报名参加日期
         bytes10 joinDate;
-        //  该日期该日期的工时 
-        bytes10 joinDuration;
+        //  该日期的工时 
+        uint joinDuration;
         //  备注
         string remark;
     }
@@ -132,12 +137,15 @@ contract Time{
         // 公益项目结束日期
         bytes10 endDate;
         // 招募的人
-        joinUser[] joinUsers;
+        mapping(uint=>joinUser) joinUsers;
+        uint joinUsersCount;
 	    // 规定早8点到晚8可以发起项目, 所以每个项目对应21个审核员的投票1是通过，-1是不通过,0是该审核人没有投票
         // mapping(address=>int) vote;
         // mapping实现不了查找一个项目的所有审核员，而且一个项目有两次审核 (申请审核，结束审核)所以换成以下形式 
-        voteProject[] voteProjectApply;
-        voteProject[] voteProjectResult;
+        mapping(uint=>voteProject) voteProjectApply;
+        uint voteProjectApplyCount;
+        mapping(uint=>voteProject) voteProjectResult;
+        uint voteProjectResultCount;
     }
     
     // 提交的举报记录
@@ -152,36 +160,43 @@ contract Time{
         string[] reason;
         // 举报描述
         string[] description;
-    }    
+    }
+    
+    // ====================================普通用户期望======================================
+    // function showProject()returns(){
+        
+    // }
     
     
     // ====================================审核人期望======================================
     
     //对公益项目的发起进行审核，链上投票通过或不通过
-    function setVoteProjectApply(uint ID,int result){
+    function setVoteProjectApply(uint ID,int result) public {
         // 还需要检查该项目的voteProjectApply中是否已经存在该审核人的审核结果
         require(result==0 || result==1 || result==-1,"voteResult值错误:投票结果值不在(0,-1,1)中");
-        voteProject voteProjectApply;
+        voteProject memory voteProjectApply;
         voteProjectApply.voteReviewer=msg.sender;
         voteProjectApply.voteResult=result;
-        projects[ID].voteProjectApply.push(voteProjectApply);
+        uint index=projects[ID].voteProjectApplyCount+1;
+        projects[ID].voteProjectApply[index]=voteProjectApply;
     }
     
     //对公益项目的结果进行审核，链上投票通过或不通过
-    function setVoteProjectResult(uint ID,int result){
+    function setVoteProjectResult(uint ID,int result) public {
         // 还需要检查该项目的voteProjectResult中是否已经存在该审核人的审核结果
         require(result==0 || result==1 || result==-1,"voteResult值错误:投票结果值不在(0,-1,1)中");
-        voteProject voteProjectResult;
+        voteProject memory voteProjectResult;
         voteProjectResult.voteReviewer=msg.sender;
         voteProjectResult.voteResult=result;
-        projects[ID].voteProjectResult.push(voteProjectResult);
+        uint index=projects[ID].voteProjectResultCount+1;
+        projects[ID].voteProjectResult[index]=voteProjectResult;
     }
     
     // 提交举报
     function setImpeach(uint projectID,address impeachAddress,string reason,string description)public returns(bool){
         // 需要被举报的审核人是该项目的审核人不然就返回false
         for(uint i=1;i<projects.length;++i){
-            for(uint j=0;j<projects[i].voteProjectResult.length;++j){
+            for(uint j=0;j<projects[i].voteProjectResultCount;++j){
                 if(impeachAddress==projects[i].voteProjectResult[j].voteReviewer){
                     // 要判断被举报人和被举报项目的举报记录是否已经存在
                     // 若不存在，则创建一条举报记录，若存在，则添加到该记录的举报理由和举报数组中
@@ -197,13 +212,13 @@ contract Time{
                         impeachs[number].reason.push(reason);
                         impeachs[number].description.push(description);
                     }else{
-                        Impeach impeach;
+                        Impeach memory impeach;
                         impeach.sendAddress=msg.sender;
                         impeach.projectID=projectID;
                         impeach.impeachAddress=impeachAddress;
-                        impeach.reason.push(reason);
-                        impeach.description.push(description);
                         impeachs.push(impeach);
+                        impeachs[impeachs.length].reason.push(reason);
+                        impeachs[impeachs.length].description.push(description);
                     }
                     return true;
                 }
