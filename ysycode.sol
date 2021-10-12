@@ -114,13 +114,17 @@ contract Time{
         bytes10 startDate;
         // 公益项目结束日期
         bytes10 endDate;
+        // 由于使用数组导致初始化产生报错，以下三个数组修改为mapping，并加上一个计数器
         // 招募的人
-        joinUser[] joinUsers;
-	    // 规定早8点到晚8可以发起项目, 所以每个项目对应21个审核员的投票1是通过，-1是不通过,0是该审核人没有投票
+        mapping(uint=>joinUser) joinUsers;
+        uint joinUsersCount;
+	// 规定早8点到晚8可以发起项目, 所以每个项目对应21个审核员的投票1是通过，-1是不通过,0是该审核人没有投票
         // mapping(address=>int) vote;
         // mapping实现不了查找一个项目的所有审核员，而且一个项目有两次审核 (申请审核，结束审核)所以换成以下形式 
-        voteProject[] voteProjectApply;
-        voteProject[] voteProjectResult;
+        mapping(uint=>voteProject) voteProjectApply;
+        uint voteProjectApplyCount;
+        mapping(uint=>voteProject) voteProjectResult;
+        uint voteProjectResultCount;
     }
     
     
