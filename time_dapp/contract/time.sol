@@ -71,10 +71,10 @@ contract Time{
         // projects.push(project);
         
         Project memory project;
-        projects[0].ID=0;
-        projects[0].name="预留项目";
-        projects[0].state=ProjectState.FINISHED;
-        projects[0].description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
+        project.ID=0;
+        project.name="预留项目";
+        project.state=ProjectState.FINISHED;
+        project.description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
         projects.push(project);
         
     
@@ -163,9 +163,20 @@ contract Time{
     }
     
     // ====================================普通用户期望======================================
-    // function showProject()returns(){
-        
-    // }
+    function showProject() public view returns(string){
+        string memory jsonArray="{";
+        for(uint i=0;i<projects.length;++i){
+            jsonArray=strConcat(jsonArray,"{");
+            uint ID=projects[i].ID;
+            jsonArray=strConcat(jsonArray,"ID:");
+            jsonArray=strConcat(jsonArray,string(ID));
+            bytes32 name=projects[i].name;
+            ProjectState state = projects[i].state;
+            
+        }
+        jsonArray=strConcat(jsonArray,"}");
+        return jsonArray;
+    }
     
     
     // ====================================审核人期望======================================
@@ -228,12 +239,47 @@ contract Time{
         }
         
     }
+    
+    //bytes转string方法
+    function bytes32Tostring(bytes32 new_) pure public returns(string){
+      
+        uint count = 0; //定义一个计数器
+        
+        for(uint i=0;i<new_.length;i++){//通过循环判断单个字符是否为0
+            bytes1 char = new_[i];
+            if(char != 0){ // 如果字符不为0，就将count+1x
+                count++;
+            }
+        }
+        
+        bytes memory _new = new bytes(count);//此时字节数组的长度变为了count，因为count不包含0
+        
+        for(uint j = 0;j < count;j++){//进行赋值
+            _new[j] = new_[j];
+        }
+        
+        return string(_new);//输出结果
+    }
+    
+    
+    // 拼接字符串
+    function strConcat(string _a, string _b) pure public returns (string){
+        bytes memory _ba = bytes(_a);
+        bytes memory _bb = bytes(_b);
+        string memory ret = new string(_ba.length + _bb.length);
+        bytes memory bret = bytes(ret);
+        uint k = 0;
+        for (uint i = 0; i < _ba.length; i++)bret[k++] = _ba[i];
+        for (i = 0; i < _bb.length; i++) bret[k++] = _bb[i];
+        return string(ret);
+   } 
 
     // 丽瑶的测试代码
-    function getA() public view returns(bytes10){
-        // string storage description=projects[0].description;
-        // return description;
-        return projects[0].startDate;
+    function getA() public pure returns(string){
+        string memory s1="什么时候";
+        string memory s2="去吃饭";
+        string memory s3=strConcat(s1,s2);
+        return s3;
     }
     
 
