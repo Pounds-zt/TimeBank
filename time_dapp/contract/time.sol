@@ -10,22 +10,27 @@ contract Time{
     
     // 一个以太坊用户的地址对应一个用户 
     mapping(address=>User) public usersMap;
- 
     
+    // 一个地址对应这个人申请成为审核人的资料
+    mapping(address=>string) public Applyintroduce;
+    
+    // 审核人申请人 
+    address[] public ApplyReviewer;
+    //  当天审核人 
+    address[] public Review;
     // 存储公益项目
     Project[] projects;
     // 存储举报
     Impeach[] impeachs;
-    
-    Project aproject;
-    
-    //  未审核，待报名，正在报名，未开始，正在进行，已结束，已取消
+
+    //  未审核，待报名，正在报名，待开始，正在进行，已结束，已取消
     enum ProjectState{ UNREVIEWED, UNSTRATED, UNDERWAY, FINISHED, CANCELED }
     
     // 初始化函数 
     constructor(uint32 initalSupply) public {
         //初始化默认账号
         User memory user = User({
+            userAddress:msg.sender,
             name:"0",
             password:"123456",
             timeCoin:initalSupply,
@@ -69,19 +74,18 @@ contract Time{
         // project.joinUsers=joinUsers;
         // project.description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
         // projects.push(project);
-        
         Project memory project;
         project.ID=0;
         project.name="预留项目";
         project.state=ProjectState.FINISHED;
         project.description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
         projects.push(project);
-        
-    
     }
     
     // 用户数据结构
     struct User{
+        // 用户地址
+        address userAddress;
         // 用户名 
         bytes12 name;
         // 密码 
@@ -106,7 +110,7 @@ contract Time{
         //  报名参加的用户地址 
         address joinAddress;
         //  报名参加日期
-        bytes10 joinDate;
+        uint joinDate;
         //  该日期的工时 
         uint joinDuration;
         //  备注
@@ -132,10 +136,10 @@ contract Time{
         string description;
         // 公益项目招募人数
         uint[] account;
-        // 公益项目开始日期
-        uint startDate;
-        // 公益项目结束日期
-        uint endDate;
+        // 公益项目实际招募人数
+        uint[] realAccount;
+        // 公益项目开展的日期
+        uint[] dateList;
         // 招募的人
         mapping(uint=>joinUser) joinUsers;
         uint joinUsersCount;
