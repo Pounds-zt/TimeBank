@@ -133,9 +133,9 @@ contract Time{
         // 公益项目招募人数
         uint[] account;
         // 公益项目开始日期
-        bytes10 startDate;
+        uint startDate;
         // 公益项目结束日期
-        bytes10 endDate;
+        uint endDate;
         // 招募的人
         mapping(uint=>joinUser) joinUsers;
         uint joinUsersCount;
@@ -163,20 +163,20 @@ contract Time{
     }
     
     // ====================================普通用户期望======================================
-    function showProject() public view returns(string){
-        string memory jsonArray="{";
-        for(uint i=0;i<projects.length;++i){
-            jsonArray=strConcat(jsonArray,"{");
-            uint ID=projects[i].ID;
-            jsonArray=strConcat(jsonArray,"ID:");
-            jsonArray=strConcat(jsonArray,string(ID));
-            bytes32 name=projects[i].name;
-            ProjectState state = projects[i].state;
+    // function showProject() public view returns(string){
+    //     string memory jsonArray="{";
+    //     for(uint i=0;i<projects.length;++i){
+    //         jsonArray=strConcat(jsonArray,"{");
+    //         uint ID=projects[i].ID;
+    //         jsonArray=strConcat(jsonArray,"ID:");
+    //         jsonArray=strConcat(jsonArray,string(ID));
+    //         bytes32 name=projects[i].name;
+    //         ProjectState state = projects[i].state;
             
-        }
-        jsonArray=strConcat(jsonArray,"}");
-        return jsonArray;
-    }
+    //     }
+    //     jsonArray=strConcat(jsonArray,"}");
+    //     return jsonArray;
+    // }
     
     
     // ====================================审核人期望======================================
