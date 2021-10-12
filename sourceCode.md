@@ -175,6 +175,7 @@ contract Time{
         }
         else {
             user.isApplyReviewer = true;
+            user.timeCoin -= 100;
             //where can  store the introduction ???
             return true;
         }
