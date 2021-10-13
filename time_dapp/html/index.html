@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>时间银行</title>
+    <!--让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="viewport" content="width=device-width,initial-scale=0.9,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">-->
+    <link rel="stylesheet" href="../css/index.css">
+    <!--bootstrapCSS 文件-->
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--CSS 文件-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-olOxEXxDwd20BlATUibkEnjPN3sVq2YWmYOnsMYutq7X8YcUdD6y/1I+f+ZOq/47" crossorigin="anonymous">
+    <!--图标-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+</head>
+<body>
+<!--导航栏-->
+<nav class="navbar navbar-fixed-top navbar-default" id="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <!--把navbar-collapse类的内容作为折叠组件显示-->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="bi bi-calendar-plus"></i>时间银行</a>
+        </div>
+        <!--导航项目-->
+        <div class="collapse navbar-collapse" id="collapse">
+            <ul class="nav navbar-nav" id="navbar-u1">
+                <!--下拉菜单-->
+                <li class="menu-li">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="bi bi-person-circle"></span>
+                        用户
+                        <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#student-login" id="navbar-tag1">登录</a></li>
+                        <li><a href="#teacher-login" id="navbar-tag2">注册</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--背景轮播块-->
+<div id="carousel-div">
+    <div id="carousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+        <!--轮播指标-->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel" data-slide-to="1"></li>
+            <li data-target="#carousel" data-slide-to="2"></li>
+        </ol>
+        <!--轮播项目-->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="../images/Firstslide.png" alt="First slide">
+            </div>
+            <div class="item">
+                <img src="../images/Secondslide.png" alt="Second slide">
+            </div>
+            <div class="item">
+                <img src="../images/Thirdslide.png" alt="Third slide">
+            </div>
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>
+<!--两种身份选择登录块-->
+<div id="content" class="container">
+    <!--登录块-->
+    <ul class="nav nav-tabs" id="nav-tab">
+        <!--二种可选择-->
+        <li id="nav-tab-li1" class="select">
+            <a href="#student-login" id="tag1" class="select" data-toggle="tab">登录</a>
+        </li>
+        <li id="nav-tab-li2" class="unselect">
+            <a href="#teacher-login" id="tag2" class="unselect" data-toggle="tab">注册</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <!--登录表单-->
+        <!--默认选择-->
+        <div class="tab-pane fade in active" id="student-login">
+            <form class="bs-example bs-example-form" role="form" action="" method="post" id="login-form">
+                <input type="hidden" name="userAddress">
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="bi bi-person-fill"></i>用户名</span>
+                    <input type="text" class="form-control" name="loginName" placeholder="请输入用户名">
+                </div>
+                <div class="tips">
+                    <p class="tip" id="loginNametip">
+                    	
+                    </p>
+                </div>
+                
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="bi bi-lock-fill"></i>密码</span>
+                    <input type="password" class="form-control" name="loginPassword" placeholder="请输入密码">
+                </div>
+                <div class="tips">
+                    <p class="tip" id="loginPasswordtip">
+                    	
+                    </p>
+                </div>
+				
+                <input type="button" value="登录" class="submit" id="login">
+            </form>
+        </div>
+		
+		<!--注册表单-->
+        <div class="tab-pane fade" id="teacher-login">
+            <form class="bs-example bs-example-form" role="form" action="" method="post" >
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="bi bi-person-fill"></i>用户名</span>
+                    <input type="text" class="form-control" name="registerName" placeholder="用户名">
+                </div>
+                <div class="tips">
+                    <p class="tip" id="registerNametip">
+                    	
+                    </p>
+                </div>
+                
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="bi bi-lock-fill"></i>密码</span>
+                    <input type="password" class="form-control" name="registerPassword" placeholder="请输入密码">
+                </div>
+                <div class="tips">
+                    <p class="tip" id="registerPasswordtip">
+                    	
+                    </p>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="bi bi-lock-fill"></i>确认密码</span>
+                    <input type="password" class="form-control" name="registerRePassword" placeholder="请再次输入密码">
+                </div>
+                <div class="tips">
+                    <p class="tip" id="registerRePasswordtip">
+                    	
+                    </p>
+                </div>
+				
+                <input type="button" value="注册" class="submit" id="register">
+            </form>
+        </div>
+		
+        
+    <!--登入错误提示-->
+    <div id="error">
+    	<div id="error-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
+	                        &times;
+	                    </button>
+	                    <div class="modal-title">
+	                        <h4 class="modal-title" id="add-modal-label">
+	                            错误信息
+	                        </h4>
+	                    </div>
+	                    
+	                    <div class="modal-body">
+	                        <p id="errorMessage">1</p>
+	                    </div>
+	                    
+	                    <div class="modal-footer">
+	                        <!--data-dismiss="modal"可以设置关闭模态框-->
+	                        <input type="button" value="确认" class="btn btn-primary btn-in" id="error-button">
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+    	</div>
+    </div>
+</div>
+</body>
+<!-- jQuery (Bootstrap 插件需要引入) -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<!-- 包含了所有编译插件 -->
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--js文件-->
+<script type="text/javascript" src="../js/index.js"></script>
+<!--web3使用-->
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+<script type="text/javascript" src="../js/indexWeb3.js"></script>
+
+<script>
+  	var error='1';
+  	//alert(error+"为什么不弹框！");
+  	if(error=='-1'){
+  		document.getElementById("errorMessage").innerHTML="不存在该学号的学生！";
+	  	$('#error-modal').modal('show');
+  	}else if(error=='-2'){
+  		document.getElementById("errorMessage").innerHTML="学生密码错误！";
+	  	$('#error-modal').modal('show');
+  	}else if(error=='-3'){
+  		document.getElementById("errorMessage").innerHTML="不存在该工号的教师！";
+	  	$('#error-modal').modal('show');
+  	}else if(error=='-4'){
+  		document.getElementById("errorMessage").innerHTML="教师密码错误！";
+	  	$('#error-modal').modal('show');
+  	}else if(error=='-5'){
+  		document.getElementById("errorMessage").innerHTML="不存在该工号的管理员！";
+	  	$('#error-modal').modal('show');
+  	}else if(error=='-6'){
+  		document.getElementById("errorMessage").innerHTML="管理员密码错误！";
+	  	$('#error-modal').modal('show');
+  	}else if(error=='0'){
+  		document.getElementById("errorMessage").innerHTML="系统内部错误！";
+	  	$('#error-modal').modal('show');
+  	}
+</script> 
+
+</html>
+
+
