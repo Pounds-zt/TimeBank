@@ -521,6 +521,7 @@ contract Time{
         return false;
     }
     
+    // 判断用户名和密码
     function checkLogin(bytes12 _name,bytes6 _password) view public returns(bool){
         require(checkUserName(_name),"error:该用户名不存在！");
         for(uint i = 0; i < users.length; i++){
@@ -560,6 +561,8 @@ contract Time{
         usersMap[msg.sender]=user;
         users.push(user);
     }
+    
+    
     
     // ====================================个人测试代码====================================
     // 丽瑶的测试代码
