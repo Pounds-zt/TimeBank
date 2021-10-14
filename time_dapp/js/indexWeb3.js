@@ -163,7 +163,7 @@ $(document).ready(function(){
                         }else{
                             contractInstance.methods.getUserAddressByName(name).call().then(function(res){
                                 alert(res);
-                                window.location.href="example.html?"+res;
+                                window.location.href="example.html?address="+res;
                             });
                         }
                     });
