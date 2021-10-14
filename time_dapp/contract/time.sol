@@ -537,7 +537,7 @@ contract Time{
     //根据用户名返回用户地址
     function getUserAddressByName(bytes12 _name)view public returns(address){
         require(checkUserName(_name),"error:该用户名不存在！");
-        for(uint i = 0; i < users.length; i){
+        for(uint i = 0; i < users.length; i++){
             if(users[i].name == _name){
                 return users[i].userAddress;
             }
