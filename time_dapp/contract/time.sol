@@ -39,12 +39,7 @@ contract Time{
         return projects.length;
     }
     
-    // 存储举报
-    Impeach[] public impeachs;
-    // 获取举报长度
-    function getImpeachsLength()public view returns(uint){
-        return impeachs.length;
-    }
+   
 
      // 审核人个数
     uint REVIEWCOUNT=21;
@@ -168,37 +163,53 @@ contract Time{
         return projects[index1].voteProjectResult[index2].voteResult;
     }
     
-    // 提交的举报记录
-    struct Impeach{
-        // 提交者地址
-        address[]  sendAddress;
+    // 项目的举报记录
+    struct ImpeachProject{
+        // 举报编号 
+        uint ID;
         // 举报项目的编号
         uint projectID;
-        // 举报的审核人的地址
-        address impeachAddress;
+        // 提交者地址
+        address[]  sendAddress;
         // 举报理由
         string[] reason;
         // 举报描述
         string[] description;
+        // 投票结果 
+        mapping(uint=>voteProject) voteImpeachApply;
+        uint voteImpeachCount;
     }
-    //获取结构体中数组对象的方法 
-    function getImpeachSendAddress(uint index)public view returns(address[]){
-        return impeachs[index].sendAddress;
+    // 审核人举报记录
+    struct ImpeachReviewer{
+        // 举报编号 
+        uint ID;
+        // 被举报的审核人的地址
+        address impeachAddress;
+        // 提交者地址
+        address[]  sendAddress;
+        // 举报理由
+        string[] reason;
+        // 举报描述
+        string[] description;
+        // 投票结果 
+        mapping(uint=>voteProject) voteImpeachApply;
+        uint voteImpeachCount;
     }
     
-    function getImpeachReason(uint index1,uint index2)public view returns(string){
-        return impeachs[index1].reason[index2];
-    }
-    function getImpeachReasonLength(uint index)public view returns(uint){
-        return impeachs[index].reason.length;
+    // 存储举报
+    ImpeachProject[] public impeachProjects;
+    // 获取举报长度
+    function getImpeachProjectLength()public view returns(uint){
+        return impeachProjects.length;
     }
     
-    function getImpeachDescription(uint index1,uint index2)public view returns(string){
-        return impeachs[index1].description[index2];
+    // 存储举报
+    ImpeachReviewer[] public impeachReviewers;
+    // 获取举报长度
+    function getImpeachReviewerLength()public view returns(uint){
+        return impeachReviewers.length;
     }
-    function getImpeachDescriptionLength(uint index)public view returns(uint){
-        return impeachs[index].description.length;
-    }
+    
     
 
     // ====================================初始化函数====================================
@@ -234,8 +245,8 @@ contract Time{
         projects.push(project);
         projects[0].dateList.push(now);
         projects[0].dateList.push(now+1 days);
-        projects[0].account.push(52);
-        projects[0].account.push(53);
+        projects[0].account.push(4);
+        projects[0].account.push(3);
         projects[0].realAccount.push(1);
         projects[0].realAccount.push(1);
 
@@ -269,8 +280,8 @@ contract Time{
         projects.push(project2);
         projects[1].dateList.push(now);
         projects[1].dateList.push(now+1 days);
-        projects[1].account.push(62);
-        projects[1].account.push(63);
+        projects[1].account.push(2);
+        projects[1].account.push(5);
         projects[1].realAccount.push(1);
         projects[1].realAccount.push(1);
 
@@ -283,7 +294,7 @@ contract Time{
         voteProject memory _voteProjectApply2;
         _voteProjectApply2.voteReviewer=msg.sender;
         _voteProjectApply2.voteResult=-1;
-        projects[1].voteProjectApply[projects[0].voteProjectApplyCount]=_voteProjectApply2;
+        projects[1].voteProjectApply[projects[1].voteProjectApplyCount]=_voteProjectApply2;
         projects[1].voteProjectApplyCount++;
 
         voteProject memory _voteProjectResult2;
@@ -513,48 +524,46 @@ contract Time{
         projects[ID].voteProjectResult[index]=voteProjectResult;
     }
     
-    // 提交举报
-    function setImpeach(uint projectID,address impeachAddress,string reason,string description)public returns(bool){
-        //判断该项目是否存在
-        require(projectID<projects.length,"error:该项目不存在!");
+    // // 提交举报
+    // function setImpeach(uint projectID,address impeachAddress,string reason,string description)public returns(bool){
+    //     //判断该项目是否存在
+    //     require(projectID<projects.length,"error:该项目不存在!");
 
-        Project storage project=projects[projectID];
+    //     Project storage project=projects[projectID];
 
-        bool isProjectReviewer=false;
-        for(uint i=0;i<project.voteProjectResultCount;++i){
-            // 需要被举报的审核人是该项目的审核人
-            if(impeachAddress==project.voteProjectResult[i].voteReviewer){
-                isProjectReviewer=true;
-                // 要判断被举报人和被举报项目的举报记录是否已经存在
-                // 若不存在，则创建一条举报记录，若存在，则添加到该记录的举报理由和举报数组中
-                bool flag=false;
-                uint index;
-                for(uint x=0;x<impeachs.length;++x){
-                    if(impeachs[x].impeachAddress==impeachAddress && impeachs[x].projectID==projectID){
-                        flag=true;
-                        index=x;
-                    }
-                }
-                if(flag){
-                    impeachs[index].sendAddress.push(msg.sender);
-                    impeachs[index].reason.push(reason);
-                    impeachs[index].description.push(description);
-                }else{
-                    Impeach memory impeach;
-                    impeach.projectID=projectID;
-                    impeach.impeachAddress=impeachAddress;
-                    impeachs.push(impeach);
-                    impeachs[impeachs.length].sendAddress.push(msg.sender);
-                    impeachs[impeachs.length].reason.push(reason);
-                    impeachs[impeachs.length].description.push(description);
-                }
-                return true;
-            }
-        }
-        require(isProjectReviewer,"error:被举报的审核人不是该项目的审核人！");
-            
-        
-    }
+    //     bool isProjectReviewer=false;
+    //     for(uint i=0;i<project.voteProjectResultCount;++i){
+    //         // 需要被举报的审核人是该项目的审核人
+    //         if(impeachAddress==project.voteProjectResult[i].voteReviewer){
+    //             isProjectReviewer=true;
+    //             // 要判断被举报人和被举报项目的举报记录是否已经存在
+    //             // 若不存在，则创建一条举报记录，若存在，则添加到该记录的举报理由和举报数组中
+    //             bool flag=false;
+    //             uint index;
+    //             for(uint x=0;x<impeachs.length;++x){
+    //                 if(impeachs[x].impeachAddress==impeachAddress && impeachs[x].projectID==projectID){
+    //                     flag=true;
+    //                     index=x;
+    //                 }
+    //             }
+    //             if(flag){
+    //                 impeachs[index].sendAddress.push(msg.sender);
+    //                 impeachs[index].reason.push(reason);
+    //                 impeachs[index].description.push(description);
+    //             }else{
+    //                 Impeach memory impeach;
+    //                 impeach.projectID=projectID;
+    //                 impeach.impeachAddress=impeachAddress;
+    //                 impeachs.push(impeach);
+    //                 impeachs[impeachs.length].sendAddress.push(msg.sender);
+    //                 impeachs[impeachs.length].reason.push(reason);
+    //                 impeachs[impeachs.length].description.push(description);
+    //             }
+    //             return true;
+    //         }
+    //     }
+    //     require(isProjectReviewer,"error:被举报的审核人不是该项目的审核人！");
+    // }
     
 
     // ====================================工具方法====================================
@@ -654,6 +663,16 @@ contract Time{
             }
         }
         return false;
+    }
+
+    //当天公益项目人数是否已满
+    function isFullProject(uint ID,uint _joinDate) view public returns(bool){
+        for(uint i=0;i<projects[ID].dateList.length;++i){
+            if(projects[ID].dateList[i] == _joinDate){
+                return(projects[ID].account[i]<=projects[ID].realAccount[i]);
+            }
+            
+        }
     }
     
     // ====================================个人测试代码====================================

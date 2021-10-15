@@ -1,6 +1,6 @@
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"projects","outputs":[{"name":"promoterAddress","type":"address"},{"name":"ID","type":"uint256"},{"name":"name","type":"bytes32"},{"name":"state","type":"uint8"},{"name":"description","type":"string"},{"name":"startApplyTime","type":"uint256"},{"name":"endApplyTime","type":"uint256"},{"name":"joinUsersCount","type":"uint256"},{"name":"voteProjectApplyCount","type":"uint256"},{"name":"voteProjectResultCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectDateList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersRemark","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_description","type":"string"},{"name":"_startApplyTime","type":"uint256"},{"name":"_endApplyTime","type":"uint256"},{"name":"_account","type":"uint256[]"},{"name":"_dateList","type":"uint256[]"}],"name":"submitProjectInformation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint256"},{"name":"_joinDate","type":"uint256"}],"name":"joinProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getApplyReviewerLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"applyIntroduce","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PROMOTERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"users","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"applyReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"impeachs","outputs":[{"name":"projectID","type":"uint256"},{"name":"impeachAddress","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUsersLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"new_","type":"bytes32"}],"name":"bytes32Tostring","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachDescriptionLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getImpeachsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_introduction","type":"string"}],"name":"applyForReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachReasonLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"frozenCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectRealAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"sendCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"checkLogin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"},{"name":"ProjectID","type":"uint256"}],"name":"withdrawUserJoin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getImpeachReason","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showMyTimeCoin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"checkUserName","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"ID","type":"uint256"},{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"}],"name":"isJoinedProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"REVIEWERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"getUserAddressByName","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProjectsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_voteTo","type":"address"}],"name":"voteToMyPleasure","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getA","outputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawVote","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getImpeachDescription","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"usersMap","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachSendAddress","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDuration","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getReviewsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"reviews","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"addUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectResult","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"projectID","type":"uint256"},{"name":"impeachAddress","type":"address"},{"name":"reason","type":"string"},{"name":"description","type":"string"}],"name":"setImpeach","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_a","type":"string"},{"name":"_b","type":"string"}],"name":"strConcat","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"inputs":[{"name":"initalSupply","type":"uint32"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
-var address = "0x2b8e8ff6e58c4fdcca4c5a7e7aa747ca6ef7ad54";
+var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"projects","outputs":[{"name":"promoterAddress","type":"address"},{"name":"ID","type":"uint256"},{"name":"name","type":"bytes32"},{"name":"state","type":"uint8"},{"name":"description","type":"string"},{"name":"startApplyTime","type":"uint256"},{"name":"endApplyTime","type":"uint256"},{"name":"joinUsersCount","type":"uint256"},{"name":"voteProjectApplyCount","type":"uint256"},{"name":"voteProjectResultCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectDateList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersRemark","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_description","type":"string"},{"name":"_startApplyTime","type":"uint256"},{"name":"_endApplyTime","type":"uint256"},{"name":"_account","type":"uint256[]"},{"name":"_dateList","type":"uint256[]"}],"name":"submitProjectInformation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint256"},{"name":"_joinDate","type":"uint256"}],"name":"joinProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getApplyReviewerLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"applyIntroduce","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PROMOTERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"users","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"applyReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"impeachs","outputs":[{"name":"projectID","type":"uint256"},{"name":"impeachAddress","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUsersLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"new_","type":"bytes32"}],"name":"bytes32Tostring","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachDescriptionLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getImpeachsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_introduction","type":"string"}],"name":"applyForReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachReasonLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"frozenCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectRealAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"sendCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"checkLogin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"},{"name":"ProjectID","type":"uint256"}],"name":"withdrawUserJoin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getImpeachReason","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showMyTimeCoin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"checkUserName","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"ID","type":"uint256"},{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"}],"name":"isJoinedProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"REVIEWERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"getUserAddressByName","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"ID","type":"uint256"},{"name":"_joinDate","type":"uint256"}],"name":"isFullProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProjectsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_voteTo","type":"address"}],"name":"voteToMyPleasure","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getA","outputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawVote","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getImpeachDescription","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"usersMap","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachSendAddress","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDuration","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getReviewsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"reviews","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"addUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectResult","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"projectID","type":"uint256"},{"name":"impeachAddress","type":"address"},{"name":"reason","type":"string"},{"name":"description","type":"string"}],"name":"setImpeach","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_a","type":"string"},{"name":"_b","type":"string"}],"name":"strConcat","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"inputs":[{"name":"initalSupply","type":"uint32"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
+var address = "0x8b354098e9de32ac81e8746332011c7db7d55697";
 var timeContract = new web3.eth.Contract(abi,address);
 var contractInstance = timeContract;
 var Initialaddress = "0xd47ce2800aaa041db3505dd9bb426c1a2f39f796";
@@ -346,6 +346,10 @@ $(document).ready(function() {
                 field: 'account',
                 title: '招募人数',
                 sortable: true
+            }, {
+                field: 'realAccount',
+                title: '实际报名人数',
+                sortable: true
             },{
                 field: 'startApplyTime',
                 title: '开始报名时间',
@@ -432,28 +436,26 @@ $(document).ready(function() {
                             var project = JSON.parse(value);
                             var joinUsersCount = project.joinUsersCount;
                             console.log("joinUsersCount"+joinUsersCount);
-                            //i和i2用于解决call的异步调用问题
-                            var i=0;
-                            var i2=i;
-                            while(i<joinUsersCount){
-                                while(i2!=i){}
-                                console.log("getProjectJoinUsersJoinAddress前i2"+i2);
-                                contractInstance.methods.getProjectJoinUsersJoinAddress(row.ID,i2).call(function(err,res){
-                                    if(err) 
+
+                            function getJoinUsers(i,ID){
+                                console.log("getProjectJoinUsersJoinAddress前i"+i);
+                                contractInstance.methods.getProjectJoinUsersJoinAddress(ID,i).call(function(err,res){
+                                    if(err) {
                                         console.log("getProjectJoinUsersJoinAddressErr:"+err);
+                                    }
                                     else{
                                         console.log("getProjectJoinUsersJoinAddressRes:"+res);
-                                        console.log("getProjectJoinUsersJoinAddress后i2"+i2);
+                                        console.log("getProjectJoinUsersJoinAddress后i"+i);
                                         var joinUsersJoinAddress=res;
                                         console.log("joinUsersJoinAddress"+joinUsersJoinAddress);
-                                        contractInstance.methods.getProjectJoinUsersJoinDate(row.ID,i2).call().then(function(res){
-                                            // alert("res"+res+";i"+i);
+                                        contractInstance.methods.getProjectJoinUsersJoinDate(ID,i).call().then(function(res){
+                                            alert("res"+res+";i"+i);
                                             var joinUsersJoinDate=res;
                                             console.log("joinUsersJoinDate"+joinUsersJoinDate);
-                                            contractInstance.methods.getProjectJoinUsersJoinDuration(row.ID,i2).call().then(function(res){
+                                            contractInstance.methods.getProjectJoinUsersJoinDuration(ID,i).call().then(function(res){
                                                 var joinUsersJoinDuration=res;
                                                 console.log("joinUsersJoinDuration"+joinUsersJoinDuration);
-                                                contractInstance.methods.getProjectJoinUsersRemark(row.ID,i2).call().then(function(res){
+                                                contractInstance.methods.getProjectJoinUsersRemark(ID,i).call().then(function(res){
                                                     var joinUsersRemark=res;
                                                     console.log("JoinUsersRemark"+joinUsersRemark);
                                                     var Array={
@@ -463,13 +465,15 @@ $(document).ready(function() {
                                                         'remark':joinUsersRemark
                                                     };
                                                     $("#joinUsers-table").bootstrapTable('append', Array);
-                                                    i2++;
                                                 });
                                             });
                                         });
                                         }
                                     });
-                                i++;
+                            }
+
+                            for(var i=0;i<joinUsersCount;++i){
+                                getJoinUsers(i,row.ID);
                             }
                             
                         });
@@ -551,13 +555,11 @@ $(document).ready(function() {
                             var project = JSON.parse(value);
                             var voteProjectApplyCount = project.voteProjectApplyCount;
                             console.log("voteProjectApplyCount"+voteProjectApplyCount);
-                            var i= 0;
-                            var i2=0;
-                            while(i<voteProjectApplyCount) {
-                                while(i!=i2){}
-                                contractInstance.methods.getVoteProjectApplyVoteReviewer(row.ID,i).call().then(function(res){
+
+                            function getVoteProjectApply(i,ID){
+                                contractInstance.methods.getVoteProjectApplyVoteReviewer(ID,i).call().then(function(res){
                                     var voteReviewer=res;
-                                    contractInstance.methods.getVoteProjectApplyVoteResult(row.ID,i).call().then(function(res){
+                                    contractInstance.methods.getVoteProjectApplyVoteResult(ID,i).call().then(function(res){
                                        var voteResult=res; 
                                        var result;
                                         if(voteResult==0){
@@ -574,11 +576,13 @@ $(document).ready(function() {
                                             "voteResult":result
                                         };
                                         $("#voteProjectApply-table").bootstrapTable('append', Array);
-                                        i2++;
+
                                     });
-                                    
                                 });
-                                i++;
+                            }
+
+                            for(var i=0;i<voteProjectApplyCount;++i) {
+                                getVoteProjectApply(i,row.ID);
                             }
                         });
                     }
@@ -659,13 +663,11 @@ $(document).ready(function() {
                             var project = JSON.parse(value);
                             var voteProjectResultCount = project.voteProjectResultCount;
                             console.log("voteProjectResultCount"+voteProjectResultCount);
-                            var i= 0;
-                            var i2=0;
-                            while(i<voteProjectResultCount) {
-                                while(i!=i2){}
-                                contractInstance.methods.getVoteProjectResultVoteReviewer(row.ID,i2).call().then(function(res){
+
+                            function getVoteProjectResult(i,ID){
+                                contractInstance.methods.getVoteProjectResultVoteReviewer(ID,i).call().then(function(res){
                                     var voteReviewer=res;
-                                    contractInstance.methods.getVoteProjectResultVoteResult(row.ID,i2).call().then(function(res){
+                                    contractInstance.methods.getVoteProjectResultVoteResult(ID,i).call().then(function(res){
                                        var voteResult=res; 
                                        var result;
                                         if(voteResult==0){
@@ -682,11 +684,12 @@ $(document).ready(function() {
                                             "voteResult":result
                                         };
                                         $("#voteProjectResult-table").bootstrapTable('append', Array);
-                                        i2++;
                                     });
                                     
                                 });
-                                i++;
+                            }
+                            for(var i=0;i<voteProjectResultCount;++i) {
+                                getVoteProjectResult(i,row.ID);
                             }
                         });
                     }
@@ -758,7 +761,7 @@ $(document).ready(function() {
             for(var i=0; i<dateList.length; i++){
                 if(dateList.options[i].selected){
                     flag=true;
-                    break;
+                    console.log("选了");
                 }
             }
 
@@ -767,44 +770,48 @@ $(document).ready(function() {
             if(!flag){
                 document.getElementById("errorMessage").innerHTML+='请先选择报名日期！<br/>';
             }
-            var i=0;
-            var i2=0;
-            while(i<dateList.length){
-                console.log("i:"+i+'and i2:'+i2)
-                while(i!=i2){console.log("循环中")}
-                if(dateList.options[i2].selected){
-                    console.log("dateList[i2].value"+dateList[i2].value);
-                    console.log("address"+address);
-                    console.log("id"+id);
-                    contractInstance.methods.isJoinedProject(id,address,dateList[i2].value).call().then(function(res){
-                        console.log("res:"+res);
-                        if(res){
-                            document.getElementById("errorMessage").innerHTML+="您在项目ID为"+id+"的项目中，已经报名了日期为"+dateList[i2].text+"的公益活动！<br/>";
-                            i2++;
-                        }else{
-                            console.log("3");
-                            contractInstance.methods.joinProject(id,dateList[i2].value).send({from:address,gas:6000000},function(err,res){
-                                console.log("4");
-                                if(err){
-                                    alert("err"+err);
-                                    document.getElementById("errorMessage").innerHTML+="error:"+err;
-                                }else{
-                                    if(res){
-                                        document.getElementById("errorMessage").innerHTML+="报名项目ID为"+id+"的项目，日期为"+dateList[i2].text+"的公益活动，成功！<br/>";
+
+            function JoinedProject(i,id,address,dateList) {
+                console.log("dateList[i2].value"+dateList[i].value);
+                console.log("address"+address);
+                console.log("id"+id);
+                contractInstance.methods.isJoinedProject(id,address,dateList[i].value).call().then(function(res){
+                    console.log("res:"+res);
+                    if(res){
+                        document.getElementById("errorMessage").innerHTML+="您在项目ID为"+id+"的项目中，已经报名了日期为"+dateList[i].text+"的公益活动，报名失败！<br/>";
+                    }else{
+                        contractInstance.methods.isFullProject(id,dateList[i].value).call().then(function(res){
+                            if(res){
+                                document.getElementById("errorMessage").innerHTML+="报名项目ID为"+id+"的项目，在日期为"+dateList[i].text+"的报名人数已满，报名失败！<br/>";
+                            }else{
+                                console.log("3");
+                                contractInstance.methods.joinProject(id,dateList[i].value).send({from:address,gas:6000000},function(err,res){
+                                    console.log("4");
+                                    if(err){
+                                        alert("err"+err);
+                                        document.getElementById("errorMessage").innerHTML+="error:"+err;
                                     }else{
-                                        document.getElementById("errorMessage").innerHTML+="报名项目ID为"+id+"的项目，日期为"+dateList[i2].text+"的公益活动，失败！<br/>";
+                                        if(res){
+                                            document.getElementById("errorMessage").innerHTML+="项目ID为"+id+"的项目，日期为"+dateList[i].text+"的公益活动，报名成功！<br/>";
+                                        }else{
+                                            document.getElementById("errorMessage").innerHTML+="项目ID为"+id+"的项目，日期为"+dateList[i].text+"的公益活动，报名失败！<br/>";
+                                        }
                                     }
-                                }
-                                i2++;
-                            });
-                        }
-                    });
-                }else{
-                    i2++;
-                }
-                i++;
+                                });
+                            }
+                        });
+                        
+                    }
+                });
             }
+            for(var i=0; i<dateList.length; i++){
+                if(dateList.options[i].selected){
+                    JoinedProject(i,id,address,dateList);
+                }
+            }
+            
             $('#error-modal').modal('show');
+            $('#tag2').trigger("click");
             //alert(dateList);
         });
 
@@ -852,24 +859,28 @@ $(document).ready(function() {
                     var index = project.ID;
                     contractInstance.methods.getProjectAccount(index).call().then(function(account){
                         console.log("account:"+account);
-                        contractInstance.methods.getProjectDateList(index).call().then(function(dateList){
-                            console.log("dateList:"+dateList);
-                            var date=[];
-                            for(var j=0; j<dateList.length; j++){
-                                date.push(getDdate(dateList[j]));
-                            }
-                            var Array={
-                                "ID":project.ID,
-                                'name':utf8to16(web3.utils.hexToAscii(project.name)),
-                                'state':project.state,
-                                'description':project.description,
-                                'dateList':date,
-                                'account':account,
-                                'startApplyTime':project.startApplyTime,
-                                'endApplyTime':project.endApplyTime
-                            };
-                            $("#projects-table").bootstrapTable('append', Array);
+                        contractInstance.methods.getProjectRealAccount(index).call().then(function(realAccount){
+                            contractInstance.methods.getProjectDateList(index).call().then(function(dateList){
+                                console.log("dateList:"+dateList);
+                                var date=[];
+                                for(var j=0; j<dateList.length; j++){
+                                    date.push(getDdate(dateList[j]));
+                                }
+                                var Array={
+                                    "ID":project.ID,
+                                    'name':utf8to16(web3.utils.hexToAscii(project.name)),
+                                    'state':project.state,
+                                    'description':project.description,
+                                    'dateList':date,
+                                    'account':account,
+                                    'realAccount':realAccount,
+                                    'startApplyTime':project.startApplyTime,
+                                    'endApplyTime':project.endApplyTime
+                                };
+                                $("#projects-table").bootstrapTable('append', Array);
+                            });
                         });
+                        
                     });
 
                 });
