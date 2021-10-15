@@ -103,6 +103,8 @@ contract Time{
     
     // 公益项目数据结构
     struct Project{
+        // 项目发起人 
+        address promoterAddress;
         // 公益项目ID
         uint ID;
         // 公益项目名称
@@ -224,6 +226,55 @@ contract Time{
         projects[0].dateList.push(now+1 days);
         projects[0].account.push(52);
         projects[0].account.push(53);
+
+        // 测试代码
+        joinUser memory _joinUser;
+        _joinUser.joinAddress=msg.sender;
+        _joinUser.joinDate=now;
+        projects[0].joinUsers[projects[0].joinUsersCount]=_joinUser;
+        projects[0].joinUsersCount++;
+
+        voteProject memory _voteProjectApply;
+        _voteProjectApply.voteReviewer=msg.sender;
+        _voteProjectApply.voteResult=1;
+        projects[0].voteProjectApply[projects[0].voteProjectApplyCount]=_voteProjectApply;
+        projects[0].voteProjectApplyCount++;
+
+        voteProject memory _voteProjectResult;
+        _voteProjectResult.voteReviewer=msg.sender;
+        _voteProjectResult.voteResult=1;
+        projects[0].voteProjectResult[projects[0].voteProjectResultCount]=_voteProjectResult;
+        projects[0].voteProjectResultCount++;
+
+        // 初始化预留项目
+        Project memory project2;
+        project2.ID=1;
+        project2.name="测试项目1";
+        project2.state=ProjectState.FINISHED;
+        project2.description="测试项目1的描述";
+        projects.push(project2);
+        projects[1].dateList.push(now);
+        projects[1].dateList.push(now+1 days);
+        projects[1].account.push(62);
+        projects[1].account.push(63);
+
+        joinUser memory _joinUser2;
+        _joinUser2.joinAddress=msg.sender;
+        _joinUser2.joinDate=now;
+        projects[1].joinUsers[projects[1].joinUsersCount]=_joinUser;
+        projects[1].joinUsersCount++;
+
+        voteProject memory _voteProjectApply2;
+        _voteProjectApply2.voteReviewer=msg.sender;
+        _voteProjectApply2.voteResult=-1;
+        projects[1].voteProjectApply[projects[0].voteProjectApplyCount]=_voteProjectApply2;
+        projects[1].voteProjectApplyCount++;
+
+        voteProject memory _voteProjectResult2;
+        _voteProjectResult2.voteReviewer=msg.sender;
+        _voteProjectResult2.voteResult=-1;
+        projects[1].voteProjectResult[projects[1].voteProjectResultCount]=_voteProjectResult2;
+        projects[1].voteProjectResultCount++;
     }
 
     // ====================================普通用户期望======================================
@@ -339,6 +390,7 @@ contract Time{
         require(usersMap[msg.sender].timeCoin>=PROMOTERFROZEN,"error:时间余额不足发起人抵押时间余额!");
         uint id = projects.length;
         Project memory project ;
+        project.promoterAddress=msg.sender;
         project.ID = id;
         project.name = _name;
         project.description = _description;

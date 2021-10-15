@@ -1,0 +1,47 @@
+/* -------------ysy--------------- */
+.ysy-textarea{
+    width: 100%;
+    height: 600%;
+    border: none;
+    resize: none;
+    cursor: pointer;
+    overflow-x:hidden;
+    overflow-y:hidden;
+}
+
+.ysy-form-box{
+    width: 600px;
+    padding: 10px;
+}
+
+
+.ysy-form-group3{
+    width: 250px;
+    display: flex;
+    text-align: right;
+}
+.ysy-form-group3 label{
+    flex: 5;
+    padding-top: 7px;
+    padding-right: 7px;
+}
+.ysy-form-group3 .input-group{
+    flex:7;
+    text-align: left;
+}
+
+
+.ysy-form-group4{
+    width: 600px;
+    display: flex;
+    text-align: right;
+}
+.ysy-form-group4 label{
+    flex: 1.45;
+    padding-top: 7px;
+    padding-right: 7px;
+}
+.ysy-form-group4 .input-group{
+    flex:7;
+    text-align: left;
+}
