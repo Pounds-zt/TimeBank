@@ -14,17 +14,10 @@ contract Time{
     
     // 一个以太坊用户的地址对应一个用户 
     mapping(address=>User) public usersMap;
-    // get方法
-    function getUsersMap(address _address) public view returns(uint){
-        return usersMap[_address].index;
-    }
+
     
     // 一个地址对应这个人申请成为审核人的资料
     mapping(address=>string) public applyIntroduce;
-    // get方法
-    function getApplyIntroduce(address _address) public view returns(string){
-        return applyIntroduce[_address];
-    }
     
     // 审核人申请人
     address[] public applyReviewer;
@@ -33,8 +26,11 @@ contract Time{
         return applyReviewer.length;
     }
     
-    //  当天审核人 
+    //  当天审核人(0位置一直是默认账户 )
     address[] public reviews;
+    function getReviewsLength()public view returns(uint){
+        return reviews.length;
+    }
     
     // 存储公益项目
     Project[] public projects;
@@ -144,6 +140,7 @@ contract Time{
     function getProjectDateList(uint index)public view returns(uint[]){
         return projects[index].dateList;
     }
+    
     function getProjectJoinUsersJoinAddress(uint index1,uint index2)public view returns(address){
         return projects[index1].joinUsers[index2].joinAddress;
     }
@@ -160,8 +157,15 @@ contract Time{
     function getVoteProjectApplyVoteReviewer(uint index1,uint index2)public view returns(address){
         return projects[index1].voteProjectApply[index2].voteReviewer;
     }
-    function getVoteProjectApplyRemark(uint index1,uint index2)public view returns(int){
+    function getVoteProjectApplyVoteResult(uint index1,uint index2)public view returns(int){
         return projects[index1].voteProjectApply[index2].voteResult;
+    }
+    
+    function getVoteProjectResultVoteReviewer(uint index1,uint index2)public view returns(address){
+        return projects[index1].voteProjectResult[index2].voteReviewer;
+    }
+    function getVoteProjectResultVoteResult(uint index1,uint index2)public view returns(int){
+        return projects[index1].voteProjectResult[index2].voteResult;
     }
     
     // 提交的举报记录
@@ -215,17 +219,25 @@ contract Time{
         usersMap[msg.sender]=user;
         users.push(user);
         
+        
+        applyReviewer.push(msg.sender);
+        reviews.push(msg.sender);        
+        
         // 初始化预留项目
         Project memory project;
         project.ID=0;
         project.name="预留项目";
-        project.state=ProjectState.FINISHED;
+        project.state=ProjectState.APPLYING;
         project.description="为了简化下标获取公益项目，所以下标为0的公益项目保留";
+        project.startApplyTime=now-6 days;
+        project.endApplyTime=now+6 days;
         projects.push(project);
         projects[0].dateList.push(now);
         projects[0].dateList.push(now+1 days);
         projects[0].account.push(52);
         projects[0].account.push(53);
+        projects[0].realAccount.push(1);
+        projects[0].realAccount.push(1);
 
         // 测试代码
         joinUser memory _joinUser;
@@ -250,13 +262,17 @@ contract Time{
         Project memory project2;
         project2.ID=1;
         project2.name="测试项目1";
-        project2.state=ProjectState.FINISHED;
+        project2.state=ProjectState.APPLYING;
         project2.description="测试项目1的描述";
+        project2.startApplyTime=now-5 days;
+        project2.endApplyTime=now+3 days;
         projects.push(project2);
         projects[1].dateList.push(now);
         projects[1].dateList.push(now+1 days);
         projects[1].account.push(62);
         projects[1].account.push(63);
+        projects[1].realAccount.push(1);
+        projects[1].realAccount.push(1);
 
         joinUser memory _joinUser2;
         _joinUser2.joinAddress=msg.sender;
@@ -280,10 +296,10 @@ contract Time{
     // ====================================普通用户期望======================================
 
     // 用户申请加入一个公益项目
-    function joinProject(uint _id,uint _joinDate, string _remark) public returns(bool){
+    function joinProject(uint _id,uint _joinDate) public returns(bool){
         
         // 判断项目是否存在
-        require(_id<=projects.length,"error:该项目不存在！");
+        require(_id<projects.length,"error:该项目不存在！");
         
         // 判断参加的日期是否在公益项目开展的日期中
         bool flag=false;
@@ -298,9 +314,12 @@ contract Time{
 
         // 判断该项目是否在“正在报名”状态
         require(projects[_id].state==ProjectState.APPLYING,"error:该项目不处于正在报名状态");
+        
+        //判断用户是否已经参加该项目该日期的公益活动isJoinedProject
+        require(!isJoinedProject(_id,msg.sender,_joinDate),"error:该用户已经参加该项目该日期的公益活动");
 
         // 该日期报名人数没超过该日上线
-        require(projects[_id].realAccount[dateIndex]<projects[_id].account[dateIndex]);
+        require(projects[_id].realAccount[dateIndex]<projects[_id].account[dateIndex],"error:该日报名人数上限");
         
         joinUser memory _joinUser = joinUser({
             // 报名参加的用户地址
@@ -310,7 +329,7 @@ contract Time{
             // 该日期的工时，申请时默认为0，后由发起人提交实际工时
             joinDuration:0,
             //参加者的备注 
-            remark:_remark 
+            remark:"无"
         }); 
 
         // 报名成功，该公益项目该日实际报名人数增加
@@ -318,9 +337,9 @@ contract Time{
 
         projects[_id].joinUsers[projects[_id].joinUsersCount]=_joinUser;
         projects[_id].joinUsersCount++;
-        projects[_id].realAccount[dateIndex]++;
         
         return true;
+
 
     }
 
@@ -396,6 +415,7 @@ contract Time{
         project.description = _description;
         project.account = _account;
         project.dateList = _dateList;
+        project.realAccount = new uint[](_dateList.length);
         project.startApplyTime=_startApplyTime;
         project.endApplyTime=_endApplyTime;
         //默认是0，可以不写，防错，先放着
@@ -404,14 +424,25 @@ contract Time{
         project.voteProjectApplyCount = 0;
         projects.push(project);
         
-         // 每次申请项目的时候初始化审核投票mapping（每次项目审核失败被取消的时候，会清空原本的voteProjectResult）  但这个还没测试过
-        for(uint i=0;i<REVIEWCOUNT;i++){
-            voteProject memory _voteProject;
-            _voteProject.voteReviewer = reviews[i+1];
-            _voteProject.voteResult = 0;
-            projects[projects.length-1].voteProjectResult[i] = _voteProject;
+         // 每次申请项目的时候初始化审核投票mapping
+        // >=21 
+
+        if((applyReviewer.length-1)>=REVIEWCOUNT){ 
+             // 每次申请项目的时候初始化审核投票mapping（每次项目审核失败被取消的时候，会清空原本的voteProjectResult）  但这个还没测试过 
+            for(uint i=0;i<REVIEWCOUNT;i++){ 
+                voteProject memory _voteProject; 
+                _voteProject.voteReviewer = reviews[i+1]; 
+                _voteProject.voteResult = 0; 
+                projects[projects.length-1].voteProjectResult[i] = _voteProject; 
+            } 
+            projects[projects.length-1].voteProjectResultCount = REVIEWCOUNT; 
+        }else{ 
+            voteProject memory _voteProject2; 
+            _voteProject2.voteReviewer = reviews[0]; 
+            _voteProject2.voteResult = 0; 
+            projects[projects.length-1].voteProjectResult[0] = _voteProject2; 
+            projects[projects.length-1].voteProjectResultCount = 1; 
         }
-        projects[projects.length-1].voteProjectResultCount = REVIEWCOUNT;
         
     }
     
@@ -614,12 +645,21 @@ contract Time{
         users.push(user);
     }
     
-    
+    // ====================================报名公益项目使用====================================
+    //判断用户是否已经报名该日期的该公益活动
+    function isJoinedProject(uint ID,address _joinAddress,uint _joinDate) view public returns(bool){
+        for(uint i=0;i<projects[ID].joinUsersCount;++i){
+            if(projects[ID].joinUsers[i].joinAddress == _joinAddress&&projects[ID].joinUsers[i].joinDate == _joinDate){
+                return true;
+            }
+        }
+        return false;
+    }
     
     // ====================================个人测试代码====================================
     // 丽瑶的测试代码
-    function getA() public view returns(uint){
-        return users.length;
+    function getA() public view returns(uint a,uint b){
+        return (users.length,2);
         // return PROMOTERFROZEN;
         
     }

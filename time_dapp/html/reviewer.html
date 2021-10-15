@@ -35,7 +35,7 @@
                     <ul>
                         <li>
                             <a href="#tab0" data-toggle="tab" class="tag" id="tag0" id="menu-title">
-                                高校成绩管理数据库系统
+                                时间银行
                             </a>
                         </li>
                     </ul>
@@ -284,14 +284,14 @@
 <div id="error">
     <div id="error-modal" class="modal fade" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="error-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
                         &times;
                     </button>
                     <div class="modal-title">
                         <h4 class="modal-title" id="add-modal-label">
-                            错误信息
+                            操作提示
                         </h4>
                     </div>
 
@@ -310,37 +310,127 @@
 </div>
 
 <!--报名名单模态框-->
-<div id="error">
-    <div id="joinUsers-modal" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
-                        &times;
-                    </button>
-                    <div class="modal-title">
-                        <h4 class="modal-title" id="add-modal-label">
-                            报名名单
-                        </h4>
-                    </div>
 
-                    <div class="modal-body">
-                        <span id="joinUsersMessage"></span>
-                        <table id='joinUsers-table' class='table'></table>
-                    </div>
+<div id="joinUsers-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
+                    &times;
+                </button>
+                <div class="modal-title">
+                    <h4 class="modal-title" id="add-modal-label">
+                        报名名单
+                    </h4>
+                </div>
 
-                    <div class="modal-footer">
-                        <!--data-dismiss="modal"可以设置关闭模态框-->
-                        <input type="button" value="确认" class="btn btn-primary btn-in" data-dismiss="modal">
-                    </div>
+                <div class="modal-body">
+                    <span id="joinUsersMessage"></span>
+                    <table id='joinUsers-table' class='table'></table>
+                </div>
+
+                <div class="modal-footer">
+                    <!--data-dismiss="modal"可以设置关闭模态框-->
+                    <input type="button" value="确认" class="btn btn-primary btn-in" data-dismiss="modal">
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+<!--公益项目申报结果模态框-->
+
+<div id="voteProjectApply-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
+                    &times;
+                </button>
+                <div class="modal-title">
+                    <h4 class="modal-title" id="add-modal-label">
+                        审核人审核公益项目申请的信息
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <span id="voteProjectApplyMessage"></span>
+                    <table id='voteProjectApply-table' class='table'></table>
+                </div>
+
+                <div class="modal-footer">
+                    <!--data-dismiss="modal"可以设置关闭模态框-->
+                    <input type="button" value="确认" class="btn btn-primary btn-in" data-dismiss="modal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--公益项目确定结果模态框-->
+
+<div id="voteProjectResult-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
+                    &times;
+                </button>
+                <div class="modal-title">
+                    <h4 class="modal-title" id="add-modal-label">
+                        审核人审核公益项目确定的信息
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <span id="voteProjectResultMessage"></span>
+                    <table id='voteProjectResult-table' class='table'></table>
+                </div>
+
+                <div class="modal-footer">
+                    <!--data-dismiss="modal"可以设置关闭模态框-->
+                    <input type="button" value="确认" class="btn btn-primary btn-in" data-dismiss="modal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--确定结果模态框-->
+<div id="voteProjectResult-modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="modal-close">
+                    &times;
+                </button>
+                <div class="modal-title">
+                    <h4 class="modal-title" id="add-modal-label">
+                        审核人审核公益项目结果的信息
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <span id="voteProjectResultMessage"></span>
+                    <table id='voteProjectResult-table' class='table'></table>
+                </div>
+
+                <div class="modal-footer">
+                    <!--data-dismiss="modal"可以设置关闭模态框-->
+                    <input type="button" value="确认" class="btn btn-primary btn-in" data-dismiss="modal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--报名模态框--> 
-<div id="joinModal" class="modal fade" tabindex="-1" aria-hidden="true"> 
+<div id="join-Modal" class="modal fade" tabindex="-1" aria-hidden="true"> 
     <div class="modal-dialog"> 
         <div class="modal-content"> 
             <div class="modal-header"> 
@@ -349,46 +439,49 @@
                 </button> 
                 <div class="modal-title"> 
                     <h4 class="modal-title" id="add-modal-label"> 
-                        项目名
+                        公益项目报名
                     </h4> 
                 </div> 
                 <div class="modal-body"> 
                     <form> 
                         <div class="form-box">
-                            <div class="form-group4"> 
+                            <div class="form-group3"> 
+                                <label class="control-label"> 
+                                    项目ID： 
+                                </label> 
+                                <div class="input-group"> 
+                                    <input id="join-project-id" type="text" class="form-control" readonly="readonly"> 
+                                </div> 
+                            </div>
+                            <div class="form-group3"> 
                                 <label class="control-label"> 
                                     项目名： 
                                 </label> 
                                 <div class="input-group"> 
-                                    <input id="join-project" type="text" class="form-control" readonly="readonly"> 
+                                    <input id="join-project-name" type="text" class="form-control" readonly="readonly"> 
                                 </div> 
                             </div>
                             <div class="tips"> 
-                                <p class="tip" id="join-project-tip"></p> 
+                                <p class="tip" id="join-project-name-tip"></p> 
                             </div> 
                         </div>                        
                             
                         <div class="form-box">
-                            <div class="form-group4"> 
+                            <div class="form-group3"> 
                                 <label class="control-label"> 
                                     报名时间： 
                                 </label> 
-                                <div class="input-group">                     
-                                        &#160;<input type="checkbox" value="选项 1">&#160;10-14
-                                        &#160;<input type="checkbox" value="选项 2">&#160;10-15
-                                        <br>
-                                        &#160;<input type="checkbox" value="选项 2">&#160;10-16
-                                        &#160;<input type="checkbox" value="选项 2">&#160;10-17                     
-                                </div> 
+                                <select name='joinDate-select' id='joinDate-select' multiple="multiple">
+                                </select>
                             </div>
                             <div class="tips"> 
-                                <p class="tip" id="join-project-tip"></p> 
+                                <p class="tip" id="joinDate-select-tip"></p> 
                             </div>    
                         </div>
 
 
                         <div class="tips"> 
-                             <p class="tip" id="add8-modal-tip"></p> 
+                             <p class="tip" id="join-Modal-tip"></p> 
                         </div> 
 
 
@@ -396,7 +489,7 @@
                         <div class="modal-footer"> 
                             <!--data-dismiss="modal"可以设置关闭模态框--> 
                             <input type="reset" value="重置" class="btn btn-default btn-in"> 
-                            <input type="button" value="确认添加" class="btn btn-primary btn-in" data-dismiss="modal"> 
+                            <input type="button" value="确认报名" class="btn btn-primary btn-in" id="join-Modal-submit"> 
                         </div> 
                     </form> 
                 </div> 

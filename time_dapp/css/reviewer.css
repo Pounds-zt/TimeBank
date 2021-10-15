@@ -45,3 +45,25 @@
     flex:7;
     text-align: left;
 }
+
+
+/*下拉框*/
+.form-group3{
+    width: 250px;
+    display: flex;
+    text-align: left;
+}
+.form-group3 label{
+    flex: 4;
+    padding-top: 7px;
+    padding-right: 7px;
+}
+.form-group3 .input-group{
+    flex:7;
+    text-align: left;
+}
+
+/*错误提示框最高*/
+#error-modal{
+    z-index: 3000;
+}
