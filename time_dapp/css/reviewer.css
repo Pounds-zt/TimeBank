@@ -116,9 +116,6 @@
     display: inline-block;
     width: 30px;
     font-size: 2em;
-    position: absolute;
-    left:-10px;
-    top:-5px;
     color: #6c757d;
 }
 .add-logo:hover{
@@ -136,4 +133,26 @@
 }
 .delete-logo:hover{
     color: #99ccff;
+}
+
+.form-box2{
+    width: 700px;
+    padding: 10px;
+}
+
+
+/* 查看项目详情 */
+.form-group4{
+    width: 500px;
+    display: flex;
+    text-align: left;
+}
+.form-group4 label{
+    flex: 2;
+    padding-top: 7px;
+    padding-right: 7px;
+}
+.form-group4 .input-group{
+    flex:7;
+    text-align: left;
 }

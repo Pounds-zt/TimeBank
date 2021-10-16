@@ -1,6 +1,6 @@
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"projects","outputs":[{"name":"promoterAddress","type":"address"},{"name":"ID","type":"uint256"},{"name":"name","type":"bytes32"},{"name":"state","type":"uint8"},{"name":"description","type":"string"},{"name":"startApplyTime","type":"uint256"},{"name":"endApplyTime","type":"uint256"},{"name":"joinUsersCount","type":"uint256"},{"name":"voteProjectApplyCount","type":"uint256"},{"name":"voteProjectResultCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectDateList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersRemark","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_description","type":"string"},{"name":"_startApplyTime","type":"uint256"},{"name":"_endApplyTime","type":"uint256"},{"name":"_account","type":"uint256[]"},{"name":"_dateList","type":"uint256[]"}],"name":"submitProjectInformation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint256"},{"name":"_joinDate","type":"uint256"}],"name":"joinProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getApplyReviewerLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"applyIntroduce","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PROMOTERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"users","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"applyReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"impeachs","outputs":[{"name":"projectID","type":"uint256"},{"name":"impeachAddress","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUsersLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"new_","type":"bytes32"}],"name":"bytes32Tostring","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachDescriptionLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getImpeachsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_introduction","type":"string"}],"name":"applyForReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachReasonLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"frozenCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectApply","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectRealAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"sendCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"checkLogin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"},{"name":"ProjectID","type":"uint256"}],"name":"withdrawUserJoin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getImpeachReason","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showMyTimeCoin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"checkUserName","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"ID","type":"uint256"},{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"}],"name":"isJoinedProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"REVIEWERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"getUserAddressByName","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"ID","type":"uint256"},{"name":"_joinDate","type":"uint256"}],"name":"isFullProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProjectsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_voteTo","type":"address"}],"name":"voteToMyPleasure","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getA","outputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawVote","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getImpeachDescription","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"usersMap","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getImpeachSendAddress","outputs":[{"name":"","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDuration","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getReviewsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"reviews","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"addUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectResult","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"projectID","type":"uint256"},{"name":"impeachAddress","type":"address"},{"name":"reason","type":"string"},{"name":"description","type":"string"}],"name":"setImpeach","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_a","type":"string"},{"name":"_b","type":"string"}],"name":"strConcat","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"inputs":[{"name":"initalSupply","type":"uint32"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
-var address = "0x3438679ce1fa002ca6836a1eef715206ff0a1ba0";
+var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"projects","outputs":[{"name":"promoterAddress","type":"address"},{"name":"ID","type":"uint256"},{"name":"name","type":"bytes32"},{"name":"state","type":"uint8"},{"name":"description","type":"string"},{"name":"startApplyTime","type":"uint256"},{"name":"endApplyTime","type":"uint256"},{"name":"joinUsersCount","type":"uint256"},{"name":"voteProjectApplyCount","type":"uint256"},{"name":"voteProjectResultCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_ID","type":"uint256"}],"name":"submitProjectFix","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectDateList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersRemark","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"bytes32"},{"name":"_description","type":"string"},{"name":"_startApplyTime","type":"uint256"},{"name":"_endApplyTime","type":"uint256"},{"name":"_account","type":"uint256[]"},{"name":"_dateList","type":"uint256[]"}],"name":"submitProjectInformation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"uint256"},{"name":"_joinDate","type":"uint256"}],"name":"joinProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getApplyReviewerLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"applyIntroduce","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"PROMOTERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"users","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"applyReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUsersLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"new_","type":"bytes32"}],"name":"bytes32Tostring","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"getImpeachProjectLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_ID","type":"uint256"},{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"},{"name":"_joinDuration","type":"uint256"}],"name":"setJoinUserDuration","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_introduction","type":"string"}],"name":"applyForReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"frozenCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getImpeachReviewerLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectApplyVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"impeachProjects","outputs":[{"name":"ID","type":"uint256"},{"name":"projectID","type":"uint256"},{"name":"voteImpeachCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectApply","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"getProjectRealAccount","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"impeachReviewers","outputs":[{"name":"ID","type":"uint256"},{"name":"impeachAddress","type":"address"},{"name":"voteImpeachCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_coin","type":"uint256"}],"name":"sendCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"checkLogin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"},{"name":"ProjectID","type":"uint256"}],"name":"withdrawUserJoin","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"showMyTimeCoin","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"checkUserName","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"ID","type":"uint256"},{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"}],"name":"isJoinedProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteReviewer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"REVIEWERFROZEN","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"bytes12"}],"name":"getUserAddressByName","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"ID","type":"uint256"},{"name":"_joinDate","type":"uint256"}],"name":"isFullProject","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getProjectsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_ID","type":"uint256"},{"name":"_joinAddress","type":"address"},{"name":"_joinDate","type":"uint256"},{"name":"_remark","type":"string"}],"name":"setJoinUserRemark","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"withdrawReviewer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_voteTo","type":"address"}],"name":"voteToMyPleasure","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getVoteProjectResultVoteResult","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getA","outputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawVote","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"usersMap","outputs":[{"name":"index","type":"uint256"},{"name":"userAddress","type":"address"},{"name":"name","type":"bytes12"},{"name":"password","type":"bytes6"},{"name":"timeCoin","type":"uint256"},{"name":"isApplyReviewer","type":"bool"},{"name":"isReviewer","type":"bool"},{"name":"isVote","type":"bool"},{"name":"voteTo","type":"address"},{"name":"voteCount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDuration","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getReviewsLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"reviews","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_address","type":"address"}],"name":"promoterCertification","outputs":[{"name":"","type":"bool"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"index1","type":"uint256"},{"name":"index2","type":"uint256"}],"name":"getProjectJoinUsersJoinDate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_userAddress","type":"address"},{"name":"_name","type":"bytes12"},{"name":"_password","type":"bytes6"}],"name":"addUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"ID","type":"uint256"},{"name":"result","type":"int256"}],"name":"setVoteProjectResult","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_a","type":"string"},{"name":"_b","type":"string"}],"name":"strConcat","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"inputs":[{"name":"initalSupply","type":"uint32"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]');
+var address = '0xb9a553d42ec78b9fe9b89b5873285935e08c20c5';
 var timeContract = new web3.eth.Contract(abi,address);
 var contractInstance = timeContract;
 var Initialaddress = "0xdd6b0c421f9f9eaF8D563de86EB422921F413237";
@@ -33,15 +33,14 @@ Date.prototype.format = function(format) {
 function getSdate(date){
     //*1000是因为solidity的时间戳是精确到秒的，但是js里是到毫秒
     var date=new Date(date*1000);
-    //加T是为了方便转回uint格式传回solidity
-    date = date.format('yyyy-MM-ddThh:mm:ss');
+    date = date.format('yyyy年MM月dd日hh:mm:ss');
     date = date.toLocaleString();
     return date;
 }
 //将solidity中的日期转换成固定格式的日期（完整的日期）
 function getDdate(date){
     var date=new Date(date*1000);
-    date = date.format('yyyy-MM-dd');
+    date = date.format('yyyy年MM月dd日');
     date = date.toLocaleString();
     return date;
 }
@@ -50,7 +49,6 @@ function getUintSdate(dateString){
     dateString = dateString.replace(/年|:/,"-");
     dateString = dateString.replace(/月/,"-");
     dateString = dateString.replace(/日/,"T");
-    alert(dateString);
     date = new Date(dateString);
     return date.valueOf()/1000;
 }
@@ -59,7 +57,8 @@ function getUintDdate(dateString){
     dateString = dateString.replace(/年/,"-");
     dateString = dateString.replace(/月/,"-");
     dateString = dateString.replace(/日/,"");
-    alert(dateString);
+    //不规定几点几分几秒，js就会默认设置为08:00:00
+    dateString = dateString+"T00:00:00";
     date = new Date(dateString);
     return date.valueOf()/1000;
 }
@@ -322,6 +321,10 @@ $(document).ready(function() {
                 title: 'ID',
                 sortable: true
             }, {
+                field: 'promoterAddress',
+                title: '项目发起人',
+                sortable: true
+            }, {
                 field: 'name',
                 title: '名称',
                 sortable: true
@@ -348,7 +351,6 @@ $(document).ready(function() {
                             // $("#project-description").innerHTML(description);
                             document.getElementById("project-description").innerHTML = description;
                         });
-                        
                     }
                 },
                 formatter: function (value, row, index) {
@@ -384,6 +386,8 @@ $(document).ready(function() {
                 events: {
                     // 模态框数据在这里加载
                     'click #joinUsers-detail': function (e, value, row, index) {
+                        $('#joinUsers-modal-id').val(row.ID);
+                        $('#joinUsers-modal-name').val(row.name);
                         $('#joinUsers-table').bootstrapTable({
                             method: 'post',             //请求方式（*）
                             dataType: "json",
@@ -409,6 +413,7 @@ $(document).ready(function() {
                             showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
                             cardView: false,                    //是否显示详细视图
                             detailView: false,              //是否显示父子表
+                            editable:true,                  //开启编辑模式
                             rowStyle:rowStyle,
                             //------导出excel表格设置
                             showExport: true,              //是否显示导出按钮
@@ -435,13 +440,73 @@ $(document).ready(function() {
                             }, {
                                 field: 'joinDuration',
                                 title: '该日时间报酬',
-                                sortable: true
+                                sortable: true,
+                                editable:{
+                                    type: 'text',
+                                    title:'修改时间报酬',
+                                    validate: function (v) {
+                                        if (!(/(^[0-9]\d*$)/.test(v))) {
+                                            return '时间报酬应为非负整数！';
+                                        } 
+                                    }
+                                }
                             }, {
                                 field: 'remark',
                                 title: '备注',
-                                sortable: true
+                                sortable: true,
+                                editable:{
+                                    type: 'text',
+                                    title:'修改备注',
+                                }
                             }
-                            ]
+                            ],
+                            onEditableSave:function(field, row, oldValue,$el){
+                                var address=$("#address").html();
+                                var projectID = $('#joinUsers-modal-id').val();
+                                alert(projectID);
+                                contractInstance.methods.isJoinedProject(projectID,row.joinAddress,getUintDdate(row.joinDate)).call().then(function(res){
+                                    if(!res){
+                                        document.getElementById("errorMessage").innerHTML="该用户未参加该项目该天的活动";
+                                        $('#error-modal').modal('show');
+                                    }else{
+                                        contractInstance.methods.projects(projectID).call().then(function(res){
+                                            // 转json字符串
+                                            var value = JSON.stringify(res);
+                                            // 转js对象
+                                            var project = JSON.parse(value);
+                                            if(project.promoterAddress!=address){
+                                                document.getElementById("errorMessage").innerHTML="您不是该项目的发起者！无法修改！";
+                                                $('#error-modal').modal('show');
+                                            }else{
+                                                if(field=="joinDuration"){
+                                                    contractInstance.methods.setJoinUserDuration(projectID,row.joinAddress,getUintDdate(row.joinDate),row.joinDuration).send({from:address,gas:6000000},function(err,res){
+                                                        if(err){
+                                                            document.getElementById("errorMessage").innerHTML="无法修改！"+err;
+                                                        }else{
+                                                            document.getElementById("errorMessage").innerHTML="修改项目"+projectID+"中，用户"+row.joinAddress+"在日期为"+row.joinDate+"的时间报酬为"+row.joinDuration+"成功!";
+                                                        }
+                                                        $('#error-modal').modal('show');
+                                                    });
+                                                }else if(field=="remark"){
+                                                    contractInstance.methods.setJoinUserRemark(projectID,row.joinAddress,getUintDdate(row.joinDate),row.remark).send({from:address,gas:6000000},function(err,res){
+                                                        if(err){
+                                                            document.getElementById("errorMessage").innerHTML="无法修改！"+err;
+                                                            alert(row.joinAddress+"时间:"+getUintDdate(row.joinDate));
+                                                        }else{
+                                                            document.getElementById("errorMessage").innerHTML="修改项目"+projectID+"中，用户"+row.joinAddress+"在日期为"+row.joinDate+"的备注为"+row.remark+"成功!";
+                                                        }
+                                                        $('#error-modal').modal('show');
+                                                    });
+                                                }else{
+                                                    document.getElementById("errorMessage").innerHTML="无法修改！";
+                                                    $('#error-modal').modal('show');
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+                                
+                            }
                         });
 
                         // 清空表格
@@ -506,12 +571,16 @@ $(document).ready(function() {
                 
             },{
                 field: 'voteProjectApply',
-                title: '申报结果审核',
+                title: '申请结果审核',
                 align: 'center',
                 valign: 'middle',
                 events: {
                     // 模态框数据在这里加载
                     'click #voteProjectApply-detail': function (e, value, row, index) {
+                        $('#voteProjectApply-modal-id').val(row.ID);
+                        $('#voteProjectApply-modal-name').val(row.name);
+                        //修改表格需要使用
+                        // $("#voteProjectApply-table").bootstrapTable('destroy');
                         $('#voteProjectApply-table').bootstrapTable({
                             method: 'post',             //请求方式（*）
                             dataType: "json",
@@ -537,13 +606,14 @@ $(document).ready(function() {
                             showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
                             cardView: false,                    //是否显示详细视图
                             detailView: false,              //是否显示父子表
+                            editable:true,                  //开启编辑模式  
                             rowStyle:rowStyle,
                             //------导出excel表格设置
                             showExport: true,              //是否显示导出按钮
                             exportDataType: "all",              //basic', 'all', 'selected'.
                             exportTypes:['excel','xlsx'],	    //导出类型
                             exportOptions:{   
-                                fileName: '申报结果审核表',              //文件名称设置  
+                                fileName: '申请结果结果审核表',              //文件名称设置  
                                 worksheetName: '工作区',          //表格工作区名称  
                                 tableName: '表格',  
                                 excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
@@ -559,9 +629,50 @@ $(document).ready(function() {
                             }, {
                                 field: 'voteResult',
                                 title: '投票结果',
-                                sortable: true
+                                sortable: true, 
+                                editable:{
+                                    type:'select',
+                                    title:'输入审核结果',
+                                    source:[
+                                        {
+                                            value:'0',
+                                            text: '未审核',
+                                        },{
+                                            value:'1',
+                                            text: '通过',
+                                        },{
+                                            value:'-1',
+                                            text: '不通过',
+                                        }
+                                    ],
+                                    
+                                }
                             }
-                            ]
+                            ],
+                            onEditableSave:function(field, row, oldValue,$el){
+                                var projectID = $('#voteProjectApply-modal-id').val();
+                                console.log("onEditableSave:"+"field:"+field+" row:"+row+" oldValue:"+oldValue+"$el"+$el);
+                                console.log("row.voteResult:"+row.voteResult);
+                                console.log("row.voteReviewer:"+row.voteReviewer);
+                                var address=$("#address").html();
+                                if(row.voteReviewer!=address){
+                                    document.getElementById("errorMessage").innerHTML="您只能修改自己的审核结果！";
+                                    $('#error-modal').modal('show');
+                                }else{
+                                    contractInstance.methods.setVoteProjectApply(projectID,row.voteResult).send({from:address,gas:6000000},function(err,res){
+                                        if(err){
+                                            document.getElementById("errorMessage").innerHTML="error:"+err;
+                                        }else{
+                                            if(res){
+                                                document.getElementById("errorMessage").innerHTML="项目ID为"+projectID+"的项目，项目申请结果修改成功！";
+                                            }else{
+                                                document.getElementById("errorMessage").innerHTML="项目ID为"+projectID+"的项目，项目申请结果修改失败<br/>！"+"您不是该项目的审核人!";
+                                            }
+                                        }
+                                        $('#error-modal').modal('show');
+                                    });
+                                }
+                            }
                         });
 
                         // 清空表格
@@ -579,19 +690,9 @@ $(document).ready(function() {
                                     var voteReviewer=res;
                                     contractInstance.methods.getVoteProjectApplyVoteResult(ID,i).call().then(function(res){
                                        var voteResult=res; 
-                                       var result;
-                                        if(voteResult==0){
-                                            result="未投票";
-                                        }else if(voteResult==1){
-                                            result="通过";
-                                        }else if(voteResult==-1){
-                                            result="不通过";
-                                        }else{
-                                            result="出错"
-                                        }
                                         var Array={
                                             "voteReviewer":voteReviewer,
-                                            "voteResult":result
+                                            "voteResult":voteResult
                                         };
                                         $("#voteProjectApply-table").bootstrapTable('append', Array);
 
@@ -613,13 +714,17 @@ $(document).ready(function() {
                 
             },{
                 field: 'voteProjectResult',
-                title: '确定结果审核',
+                title: '参与结果审核',
                 align: 'center',
                 valign: 'middle',
                 events: {
                     // 模态框数据在这里加载
-                    // 模态框数据在这里加载
+                    
                     'click #voteProjectResult-detail': function (e, value, row, index) {
+                        $('#voteProjectResult-modal-id').val(row.ID);
+                        $('#voteProjectResult-modal-name').val(row.name);
+                        //修改表格需要使用
+                        // $("#voteProjectResult-table").bootstrapTable('destroy');
                         $('#voteProjectResult-table').bootstrapTable({
                             method: 'post',             //请求方式（*）
                             dataType: "json",
@@ -645,13 +750,14 @@ $(document).ready(function() {
                             showToggle: false,                   //是否显示详细视图和列表视图的切换按钮
                             cardView: false,                    //是否显示详细视图
                             detailView: false,              //是否显示父子表
+                            editable:true,                  //开启编辑模式  
                             rowStyle:rowStyle,
                             //------导出excel表格设置
                             showExport: true,              //是否显示导出按钮
                             exportDataType: "all",              //basic', 'all', 'selected'.
                             exportTypes:['excel','xlsx'],	    //导出类型
                             exportOptions:{   
-                                fileName: '确定结果审核表',              //文件名称设置  
+                                fileName: '参与结果审核表',              //文件名称设置  
                                 worksheetName: '工作区',          //表格工作区名称  
                                 tableName: '表格',  
                                 excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
@@ -667,9 +773,52 @@ $(document).ready(function() {
                             }, {
                                 field: 'voteResult',
                                 title: '投票结果',
-                                sortable: true
+                                sortable: true,
+                                editable:{
+                                    type:'select',
+                                    title:'选择审核结果',
+                                    source:[
+                                        {
+                                            value:'0',
+                                            text: '未审核',
+                                        },{
+                                            value:'1',
+                                            text: '通过',
+                                        },{
+                                            value:'-1',
+                                            text: '不通过',
+                                        }
+                                    ],
+                                    
+                                }
                             }
-                            ]
+                            ],
+                            onEditableSave:function(field, row,oldValue,$el){
+                                var projectID = $('#voteProjectResult-modal-id').val();
+                                console.log("onEditableSave:"+"field:"+field+" row:"+row+" oldValue:"+oldValue+"$el"+$el);
+                                console.log("row.voteResult:"+row.voteResult);
+                                console.log("row.voteReviewer:"+row.voteReviewer);
+                                var address=$("#address").html();
+                                if(row.voteReviewer!=address){
+                                    document.getElementById("errorMessage").innerHTML="您只能修改自己的审核结果！";
+                                    $('#error-modal').modal('show');
+                                }else{
+                                    contractInstance.methods.setVoteProjectResult(projectID,row.voteResult).send({from:address,gas:6000000},function(err,res){
+                                        if(err){
+                                            document.getElementById("errorMessage").innerHTML="error:"+err;
+                                        }else{
+                                            if(res){
+                                                document.getElementById("errorMessage").innerHTML="项目ID为"+projectID+"的项目，项目参与结果修改成功！";
+                                            }else{
+                                                document.getElementById("errorMessage").innerHTML="项目ID为"+projectID+"的项目，项目参与结果修改失败<br/>！"+"您不是该项目的审核人!";
+                                                
+                                            }
+                                        }
+                                        $('#error-modal').modal('show');
+                                    });
+                                }
+                                
+                            }
                         });
 
                         // 清空表格
@@ -687,19 +836,9 @@ $(document).ready(function() {
                                     var voteReviewer=res;
                                     contractInstance.methods.getVoteProjectResultVoteResult(ID,i).call().then(function(res){
                                        var voteResult=res; 
-                                       var result;
-                                        if(voteResult==0){
-                                            result="未投票";
-                                        }else if(voteResult==1){
-                                            result="通过";
-                                        }else if(voteResult==-1){
-                                            result="不通过";
-                                        }else{
-                                            result="出错"
-                                        }
                                         var Array={
                                             "voteReviewer":voteReviewer,
-                                            "voteResult":result
+                                            "voteResult":voteResult
                                         };
                                         $("#voteProjectResult-table").bootstrapTable('append', Array);
                                     });
@@ -886,6 +1025,7 @@ $(document).ready(function() {
                                 }
                                 var Array={
                                     "ID":project.ID,
+                                    "promoterAddress":project.promoterAddress,
                                     'name':utf8to16(web3.utils.hexToAscii(project.name)),
                                     'state':project.state,
                                     'description':project.description,
@@ -909,10 +1049,192 @@ $(document).ready(function() {
 
     });
         
+    //----------------------------------------------------------------提交用户参与结果----------------------------------------------------------------
+    $("body").delegate("#submit-joinUsers-button","click", function(){
+        var projectID=$('#joinUsers-modal-id').val();
+        var address=$("#address").html();
+        contractInstance.methods.submitProjectFix(projectID).send({from:address,gas:6000000},function(err,res){
+            if(err){
+                document.getElementById("errorMessage").innerHTML="出错:"+err;
+                $('#error-modal').modal('show');
+            }else{
+                if(res){
+                    document.getElementById("errorMessage").innerHTML="提交公益项目参与结果成功，请等待审核人审核！";
+                    $('#error-modal').modal('show');
+                }else{
+                    document.getElementById("errorMessage").innerHTML="该公益项目不处于已结束状态，不可提交该公益项目的参与结果！";
+                    $('#error-modal').modal('show');
+                }
+                
+            }
+        });
+    });
 
-
+    //----------------------------------------------------------------删除用户报名----------------------------------------------------------------
+    $("body").delegate("#delete-joinUsers-button","click", function(){
+        var projectID=$('#joinUsers-modal-id').val();
+        var address=$("#address").html();
+        var row=$("#joinUsers-table").bootstrapTable('getSelections');
+        if(row.length==0){
+            document.getElementById("errorMessage").innerHTML="请先选择要删除的参与记录！";
+            $('#error-modal').modal('show');
+        }else{
+            document.getElementById("errorMessage").innerHTML="";
+            for(var i=0;i<row.length;++i){
+                var joinAddress=row[i].joinAddress;
+                var joinDate=getDdate(row[i].joinDate);
+                if(deleteJoinUsers(joinAddress,joinDate,projectID)){
+                    document.getElementById("errorMessage").innerHTML+="删除第"+row+"行记录成功!<br/>";
+                    $("#joinUsers-table").bootstrapTable('remove', {
+                        field: 'ID',
+                        values: row[i].ID
+                    });
+                }else{
+                    document.getElementById("errorMessage").innerHTML+="删除第"+i+"行记录出错!<br/>";
+                }
+            }
+            $('#error-modal').modal('show');
+        }
         
-}); 
+        function deleteJoinUsers(_joinAddress,_joinDate,_projectID){
+            contractInstance.methods.withdrawUserJoin(_joinAddress,_joinDate,_projectID).send({from:address,gas:6000000},function(err,res){
+                if(err){
+                    return false;
+                }else{
+                    if(res){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            });
+        }
+        
+    });
+
+});
+//----------------------------------------------------------------发起项目----------------------------------------------------------------   
+function checkProjectForm(){
+    //表单验证
+    var promoterAddress = $("#address").html();
+    var name = document.getElementsByName("form-project-name")[0].value;
+    var startApplyTime = document.getElementById("form-project-startApplyTime").value;
+    var endApplyTime = document.getElementById("form-project-endApplyTime").value;
+    var description = document.getElementById("form-project-description").value;
+
+    var sum = document.getElementsByName("dateLiestANDaccountItem").length;
+
+    var flag=true;
+
+    var dateList=[];
+    var accountList=[];
+    for(var i = 0; i <sum;++i){
+        var date = document.getElementsByName("form-date")[i].value;
+        var account = document.getElementsByName("form-account")[i].value;
+        if(!(/(^[1-9]\d*$)/.test(account))){
+            document.getElementById("form-account-tip"+i).innerHTML="当天所需报名人数应为正整数！";
+            flag=false;
+        }else{
+            document.getElementById("form-account-tip"+i).innerHTML="";
+            accountList.push(account);
+        }
+        if(date==""){
+            document.getElementById("form-date-tip"+i).innerHTML="公益项目名称不能为空！";
+            flag=false;
+        }else if(getUintSdate(endApplyTime)>=getUintDdate(date)){
+            document.getElementById("form-date-tip"+i).innerHTML="开展时间不能早于报名截止时间！";
+            flag=false;
+        }else{
+            document.getElementById("form-date-tip"+i).innerHTML=" ";
+        }
+        dateList.push(getUintDdate(date));
+    }
+
+    if(name==""){
+        document.getElementById("form-project-name-tip").innerHTML="公益项目名称不能为空！";
+        flag=false;
+    }else if(name.length>10){
+        document.getElementById("form-project-name-tip").innerHTML="公益项目名称过长！";
+        flag=false;
+    }
+    else{
+		document.getElementById("form-project-name-tip").innerHTML=" ";
+	}
+
+    if(description==""){
+        document.getElementById("form-project-description-tip").innerHTML="公益项目描述不能为空！";
+        flag=false;
+    }else{
+		document.getElementById("form-project-description-tip").innerHTML=" ";
+	}
+
+    if(startApplyTime==""){
+        document.getElementById("form-project-startApplyTime-tip").innerHTML="开始报名时间不能为空！";
+        flag=false;
+    }else{
+		document.getElementById("form-project-startApplyTime-tip").innerHTML=" ";
+	}
+
+    if(endApplyTime==""){
+        document.getElementById("form-project-endApplyTime-tip").innerHTML="截止报名时间不能为空！";
+        flag=false;
+    }else if(getUintSdate(endApplyTime)<=getUintSdate(startApplyTime)){
+        document.getElementById("form-project-endApplyTime-tip").innerHTML="截止报名时间不能早于开始报名时间！";
+        flag=false;
+    }else{
+		document.getElementById("form-project-endApplyTime-tip").innerHTML=" ";
+	}
+
+    //赋值一份数组
+    var ary = dateList.slice();
+    var nary=ary.sort();
+    var error=false;
+    for(var i=0;i<ary.length;i++){
+　　    if (nary[i]==nary[i+1]){      
+            error=true;
+            break;
+　      }
+    }
+    if(error){
+        document.getElementById("dateLiestRrror-tip").innerHTML="开展日期中存在重复日期！";
+        flag=false;
+    }else{
+        document.getElementById("dateLiestRrror-tip").innerHTML="";
+    }
+
+    if(!flag){
+        return flag;
+    }else{
+        startApplyTime=getUintSdate(startApplyTime);
+        endApplyTime=getUintSdate(endApplyTime);
+        console.log("name:"+name+";startApplyTime:"+startApplyTime+";endApplyTime"+endApplyTime+";dateList:"+dateList+";accountList:"+accountList);
+        name=web3.utils.asciiToHex(utf16to8(name));
+        console.log("name:"+name+";startApplyTime:"+startApplyTime+";endApplyTime"+endApplyTime+";dateList:"+dateList+";accountList:"+accountList,";promoterAddress:"+promoterAddress);
+        
+        contractInstance.methods.promoterCertification(promoterAddress).call().then(function(res){
+            var PROMOTERFROZEN = res[1];
+            if(res[0]){
+                contractInstance.methods.submitProjectInformation(name,description,startApplyTime,endApplyTime,accountList,dateList).send({from:promoterAddress,gas:6000000},function(err,res){
+                    if(err){
+                        alert("err"+err);
+                        document.getElementById("errorMessage").innerHTML="出错:"+err;
+                        $('#error-modal').modal('show');
+                    }else{
+                        alert("res"+res);
+                        document.getElementById("errorMessage").innerHTML="冻结时间余额:"+PROMOTERFROZEN+",成功创建新项目！<br/>"+"交易哈希:"+res;
+                        $('#error-modal').modal('show');
+                    }
+                });
+            }else{
+                document.getElementById("errorMessage").innerHTML="由于您的时间余额不足:"+PROMOTERFROZEN+",无法发起一个公益项目！";
+                $('#error-modal').modal('show');
+            }
+        });
+        
+    }
+}
+
+
 
 
 

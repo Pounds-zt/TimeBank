@@ -6,7 +6,7 @@
     <!--让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<meta name="viewport" content="width=device-width,initial-scale=0.9,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">-->
-    <link rel="stylesheet" href="../css/example.css">
+    <link rel="stylesheet" href="../css/reviewUser.css">
     <!--bootstrapCSS 文件-->
     <!-- Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -48,7 +48,7 @@
                     <a data-toggle="collapse" data-parent="menu-content" href="#menu1">
                         <div class="panel-heading" id="heading1">
 			                <span class="panel-title">
-			                    <i class="bi bi-people-fill"></i>&#160;&#160;&#160;&#160;menu1
+			                    <i class="bi bi-list-ul"></i>&#160;&#160;&#160;&#160;公益项目
 			                </span>
                             <i class="bi bi-chevron-right arrowon" id="menu-arrow1"></i>
                         </div>
@@ -58,21 +58,28 @@
                             <li>
                                 <a href="#tab1" data-toggle="tab" class="tag" id="tag1">
                                     <div class="panel-body">
-                                        <p>tag1</p>
+                                        <p>待开始报名项目</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
                                 <a href="#tab2" data-toggle="tab" class="tag" id="tag2">
                                     <div class="panel-body">
-                                        <p>tag2</p>
+                                        <p>正在报名项目</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
                                 <a href="#tab3" data-toggle="tab" class="tag" id="tag3">
                                     <div class="panel-body">
-                                        <p>tag3</p>
+                                        <p>项目历史记录</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab4" data-toggle="tab" class="tag" id="tag4">
+                                    <div class="panel-body">
+                                        <p>项目举报</p>
                                     </div>
                                 </a>
                             </li>
@@ -85,7 +92,7 @@
                     <a data-toggle="collapse" data-parent="menu-content" href="#menu2">
                         <div class="panel-heading" id="heading2">
 			                    <span class="panel-title">
-			                        <i class="bi bi-person-lines-fill"></i>&#160;&#160;&#160;&#160;menu2
+			                        <i class="bi bi-layer-forward"></i>&#160;&#160;&#160;&#160;申请
 			                    </span>
                             <i class="bi bi-chevron-right arrowon" id="menu-arrow2"></i>
                         </div>
@@ -93,28 +100,29 @@
                     <div class="panel-collapse" id="menu2">
                         <ul id="myTab2">
                             <li>
-                                <a href="#tab4" data-toggle="tab" class="tag" id="tag4">
+                                <a href="#tab5" data-toggle="tab" class="tag" id="tag5">
                                     <div class="panel-body">
-                                        <p>tag4</p>
+                                        <p>撤回审核人申请</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tab5" data-toggle="tab" class="tag" id="tag5">
+                                <a href="#tab6" data-toggle="tab" class="tag" id="tag6">
                                     <div class="panel-body">
-                                        <p>tag5</p>
+                                        <p>发起公益项目</p>
                                     </div>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
+
                 <!--第三个折叠块-->
                 <div class="panel panel-default">
                     <a data-toggle="collapse" data-parent="menu-content" href="#menu3">
                         <div class="panel-heading" id="heading3">
 			                <span class="panel-title">
-			                    <i class="bi bi-gear-fill"></i>&#160;&#160;&#160;&#160;menu3
+			                    <i class="bi bi-ui-checks"></i>&#160;&#160;&#160;&#160;审核
 			                </span>
                             <i class="bi bi-chevron-right arrowon" id="menu-arrow3"></i>
                         </div>
@@ -122,16 +130,107 @@
                     <div class="panel-collapse" id="menu3">
                         <ul id="myTab3">
                             <li>
-                                <a href="#tab6" data-toggle="tab" class="tag" id="tag6">
+                                <a href="#tab7" data-toggle="tab" class="tag" id="tag7">
                                     <div class="panel-body">
-                                        <p>tag6</p>
+                                        <p>审核项目发起</p>
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#tab7" data-toggle="tab" class="tag" id="tag7">
+                                <a href="#tab8" data-toggle="tab" class="tag" id="tag8">
                                     <div class="panel-body">
-                                        <p>tag7</p>
+                                        <p>审核项目确认</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--第四个折叠块-->
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="menu-content" href="#menu4">
+                        <div class="panel-heading" id="heading4">
+			                <span class="panel-title">
+			                    <i class="bi bi-person-lines-fill"></i>&#160;&#160;&#160;&#160;审核人
+			                </span>
+                            <i class="bi bi-chevron-right arrowon" id="menu-arrow4"></i>
+                        </div>
+                    </a>
+                    <div class="panel-collapse" id="menu4">
+                        <ul id="myTab3">
+                            <li>
+                                <a href="#tab9" data-toggle="tab" class="tag" id="tag9">
+                                    <div class="panel-body">
+                                        <p>投票</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab10" data-toggle="tab" class="tag" id="tag10">
+                                    <div class="panel-body">
+                                        <p>举报</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <!--第五个折叠块-->
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="menu-content" href="#menu5">
+                        <div class="panel-heading" id="heading5">
+			                <span class="panel-title">
+			                    <i class="bi bi-patch-exclamation"></i>&#160;&#160;&#160;&#160;举报信息
+			                </span>
+                            <i class="bi bi-chevron-right arrowon" id="menu-arrow5"></i>
+                        </div>
+                    </a>
+                    <div class="panel-collapse" id="menu5">
+                        <ul id="myTab4">
+                            <li>
+                                <a href="#tab11" data-toggle="tab" class="tag" id="tag11">
+                                    <div class="panel-body">
+                                        <p>被举报审核人</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab12" data-toggle="tab" class="tag" id="tag12">
+                                    <div class="panel-body">
+                                        <p>被举报公益项目</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--第六个折叠块-->
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="menu-content" href="#menu6">
+                        <div class="panel-heading" id="heading6">
+			                <span class="panel-title">
+			                    <i class="bi bi-globe2"></i>&#160;&#160;&#160;&#160;链上信息
+			                </span>
+                            <i class="bi bi-chevron-right arrowon" id="menu-arrow6"></i>
+                        </div>
+                    </a>
+                    <div class="panel-collapse" id="menu6">
+                        <ul id="myTab4">
+                            <li>
+                                <a href="#tab13" data-toggle="tab" class="tag" id="tag13">
+                                    <div class="panel-body">
+                                        <p>区块信息</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab14" data-toggle="tab" class="tag" id="tag14">
+                                    <div class="panel-body">
+                                        <p>预留</p>
                                     </div>
                                 </a>
                             </li>
@@ -254,6 +353,68 @@
                     </div>
                 </div>
 
+                <div class="tab-pane fade" id="tab8">
+                    <div class="menu-header">
+                        tab8
+                    </div>
+                    <div class="menu-content">
+                        tab8
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab9">
+                    <div class="menu-header">
+                        tab9
+                    </div>
+                    <div class="menu-content">
+                        tab9
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab10">
+                    <div class="menu-header">
+                        tab10
+                    </div>
+                    <div class="menu-content">
+                        tab10
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab11">
+                    <div class="menu-header">
+                        tab11
+                    </div>
+                    <div class="menu-content">
+                        tab11
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab12">
+                    <div class="menu-header">
+                        tab12
+                    </div>
+                    <div class="menu-content">
+                        tab12
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab13">
+                    <div class="menu-header">
+                        tab13
+                    </div>
+                    <div class="menu-content">
+                        tab13
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab14">
+                    <div class="menu-header">
+                        tab14
+                    </div>
+                    <div class="menu-content">
+                        tab14
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -329,7 +490,7 @@
 <!--写入json的方法-->
 <script src="https://cdn.bootcss.com/FileSaver.js/1.3.8/FileSaver.js"></script>
 <!--js文件-->
-<script type="text/javascript" src="../js/example.js"></script>
+<script type="text/javascript" src="../js/reviewUser.js"></script>
 <!-- bootstrap导出 -->
 <script type="text/javascript" src="../js/bootstrap-table-export.js"></script>
 <script type="text/javascript" src="../js/tableExport.js"></script>

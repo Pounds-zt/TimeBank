@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="../libs/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
     <!-- 多选下拉框CSS -->
     <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
+    <!-- 表格行内编辑 -->
+    <link href="../libs/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" />
 
 </head>
 
@@ -221,66 +223,78 @@
                     <div class="menu-content">
                         <form method="post" action="" target="iframeName">
                             <div class="form-box1">
-                                <div class="form-group1">
-                                    <label class="control-label">
-                                        <b class="required">*</b>
-                                        项目名称:
-                                    </label>
-                                    <div class="input-group">
-                                        <input name="form-project-name" type="text" class="form-control" placeholder="输入开始项目名称">
+                                <div class="form-box2">
+                                    <div class="form-group1">
+                                        <label class="control-label">
+                                            <b class="required">*</b>
+                                            项目名称:
+                                        </label>
+                                        <div class="input-group">
+                                            <input name="form-project-name" type="text" class="form-control" placeholder="输入开始项目名称">
+                                        </div>
+
                                     </div>
-
-                                </div>
-                                <div class="tips">
-                                    <p class="tip" id="form-project-name-tip"></p>
-                                </div>
-
-                                <div class="form-group1">
-                                    <label class="control-label">
-                                        <b class="required">*</b>
-                                        开始报名时间:
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="text" id="form-project-startApplyTime" name="datetimepicker" value="" placeholder="输入开始报名时间" class="form-control">
+                                    <div class="tips">
+                                        <p class="tip" id="form-project-name-tip"></p>
                                     </div>
                                 </div>
-                                <div class="tips">
-                                    <p class="tip" id="form-project-endApplyTime-tip"></p>
-                                </div>
 
-
-                                <div class="form-group1">
-                                    <label class="control-label">
-                                        <b class="required">*</b>
-                                        截止报名时间:
-                                    </label>
-                                    <div class="input-group">
-                                        <input type="text" id="form-project-endApplyTime" name="datetimepicker" value="" placeholder="输入开始报名时间" class="form-control">
+                                <div class="form-box2">
+                                    <div class="form-group1">
+                                        <label class="control-label">
+                                            <b class="required">*</b>
+                                            开始报名时间:
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="text" id="form-project-startApplyTime" name="datetimepicker" value="" placeholder="输入开始报名时间" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="tips">
+                                        <p class="tip" id="form-project-startApplyTime-tip"></p>
                                     </div>
                                 </div>
-                                <div class="tips">
-                                    <p class="tip" id="form-project-endApplyTime"></p>
-                                </div>
 
-                                <div class="form-group1">
-                                    <label class="control-label">
-                                        <b class="required">*</b>
-                                        描述
-                                    </label>
-                                    <div class="input-group">
-                                        <textarea id="form-project-description" class="form-control" rows="10" placeholder="请输入项目描述"></textarea>
+
+                                <div class="form-box2">
+                                    <div class="form-group1">
+                                        <label class="control-label">
+                                            <b class="required">*</b>
+                                            截止报名时间:
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="text" id="form-project-endApplyTime" name="datetimepicker" value="" placeholder="输入开始报名时间" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="tips">
+                                        <p class="tip" id="form-project-endApplyTime-tip"></p>
                                     </div>
                                 </div>
-                                <div class="tips">
-                                    <p class="tip" id="form-project-description-tip"></p>
+
+                                <div class="form-box2">
+                                    <div class="form-group1">
+                                        <label class="control-label">
+                                            <b class="required">*</b>
+                                            描述
+                                        </label>
+                                        <div class="input-group">
+                                            <textarea id="form-project-description" class="form-control" rows="10" placeholder="请输入项目描述"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="tips">
+                                        <p class="tip" id="form-project-description-tip"></p>
+                                    </div>
                                 </div>
                                 
-                                <div class="form-group1">
+                                <div class="form-box2">
                                     <label class="control-label">
                                         活动具体日期及所需人数:
                                     </label>
+                                    <a id="form-add-dateListANDaccount" class='add-logo' onclick="addRow()"><i class="bi bi-plus-circle-fill"></i></a>
                                     <div class="input-group">
-                                        <a id="form-add-dateListANDaccount" class='add-logo' onclick="addRow()"><i class="bi bi-plus-circle-fill"></i></a>
+                                        
+                                    </div>
+                                    <div>
+                                        <p class="tip" id="dateLiestRrror-tip"></p>
                                     </div>
                                 </div>
                                 
@@ -293,7 +307,7 @@
                                                     活动时间:
                                                 </label>
                                                 <div class="input-group">
-                                                    <input type="text" id="form-date0" name="datetimepicker" value="" class="form-control">
+                                                    <input type="text" id="form-date0" name="form-date" value="" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="tips">
@@ -307,7 +321,7 @@
                                                     报名人数:
                                                 </label>
                                                 <div class="input-group">
-                                                    <input type="text" id="form-account0" class="form-control" placeholder="输入当天所需报名人数">
+                                                    <input type="text" id="form-account0" name="form-account" class="form-control" placeholder="输入当天所需报名人数">
                                                     <a id="form-delete-dateListANDaccount0" class="delete-logo"><i class="bi bi-dash-circle-fill"></i></a>
                                                 </div>
                                             </div>
@@ -322,6 +336,7 @@
                                 </div>
 
                                 <div class="form-button">
+                                    <input type="reset" value="重置" class="btn btn-primary btn-in">
                                     <input type="button" value="确认" class="btn btn-primary btn-in" id="form-project-add">
                                 </div>
                                 
@@ -429,9 +444,35 @@
                         报名名单
                     </h4>
                 </div>
-
                 <div class="modal-body">
+                    <span style="display: flex">
+                        <div class="form-box">
+                            <div class="form-group2"> 
+                                <label class="control-label"> 
+                                    项目ID： 
+                                </label> 
+                                <div class="input-group"> 
+                                    <input id="joinUsers-modal-id" type="text" class="form-control" readonly="readonly"> 
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="form-box">
+                            <div class="form-group2"> 
+                                <label class="control-label"> 
+                                    项目名： 
+                                </label> 
+                                <div class="input-group"> 
+                                    <input id="joinUsers-modal-name" type="text" class="form-control" readonly="readonly"> 
+                                </div> 
+                            </div>
+                        </div>
+                    </span>
+
                     <span id="joinUsersMessage"></span>
+                    <div id="joinUsers-tool-bar">
+                        <input type="button" value="提交" class="btn btn-primary btn-in" id="submit-joinUsers-button">
+                        <input type="button" value="删除" class="btn btn-primary btn-in" id="delete-joinUsers-button">
+                    </div>
                     <table id='joinUsers-table' class='table'></table>
                 </div>
 
@@ -462,6 +503,30 @@
                 </div>
 
                 <div class="modal-body">
+
+                    <span style="display: flex">
+                        <div class="form-box">
+                            <div class="form-group2"> 
+                                <label class="control-label"> 
+                                    项目ID： 
+                                </label> 
+                                <div class="input-group"> 
+                                    <input id="voteProjectApply-modal-id" type="text" class="form-control" readonly="readonly"> 
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="form-box">
+                            <div class="form-group2"> 
+                                <label class="control-label"> 
+                                    项目名： 
+                                </label> 
+                                <div class="input-group"> 
+                                    <input id="voteProjectApply-modal-name" type="text" class="form-control" readonly="readonly"> 
+                                </div> 
+                            </div>
+                        </div>
+                    </span>
+
                     <span id="voteProjectApplyMessage"></span>
                     <table id='voteProjectApply-table' class='table'></table>
                 </div>
@@ -492,6 +557,30 @@
                 </div>
 
                 <div class="modal-body">
+
+                    <span style="display: flex">
+                        <div class="form-box">
+                            <div class="form-group2"> 
+                                <label class="control-label"> 
+                                    项目ID： 
+                                </label> 
+                                <div class="input-group"> 
+                                    <input id="voteProjectResult-modal-id" type="text" class="form-control" readonly="readonly"> 
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="form-box">
+                            <div class="form-group2"> 
+                                <label class="control-label"> 
+                                    项目名： 
+                                </label> 
+                                <div class="input-group"> 
+                                    <input id="voteProjectResult-modal-name" type="text" class="form-control" readonly="readonly"> 
+                                </div> 
+                            </div>
+                        </div>
+                    </span>
+
                     <span id="voteProjectResultMessage"></span>
                     <table id='voteProjectResult-table' class='table'></table>
                 </div>
@@ -626,7 +715,7 @@
                 <div class="modal-body"> 
                     <form> 
                         <div class="ysy-form-box">
-                            <div class="ysy-form-group3"> 
+                            <div class="form-group4"> 
                                 <label class="control-label"> 
                                     项目名：
                                 </label> 
@@ -640,7 +729,7 @@
                         </div>
                         <br>
                         <div class="ysy-form-box">
-                            <div class="ysy-form-group4"> 
+                            <div class="form-group4"> 
                                 <label class="control-label"> 
                                     项目描述：  
                                 </label> 
@@ -678,9 +767,15 @@
 <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 <!-- 包含了所有编译插件 -->
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
 <!--表格-->
 <script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/bootstrap-table.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- 表格行内编辑 -->
+<script src="https://cdn.bootcss.com/bootstrap-table/1.15.4/extensions/editable/bootstrap-table-editable.js"></script>
+<script src="../libs/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="../libs/bootstrap3-editable/js/bootstrap-editable.js"></script>
 <!-- 多选下拉框JavaScript -->
 <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
 <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select-locale-all.min.js"></script>
