@@ -60,8 +60,22 @@
             $("#menu-arrow3").removeClass("arrowoff");
         }
     }
-}
 
+
+    document.getElementById("menu-logo").onclick=function () {
+        var menu=document.getElementById("change-menu");
+        if(menu.getAttribute("class")=="bi bi-toggle-on"){
+            menu.setAttribute("class","bi bi-toggle-off");
+            document.getElementsByClassName("right-aside")[0].setAttribute("style","width:100%;");
+            document.getElementsByClassName("left-aside")[0].setAttribute("style","display:none;")
+        }else {
+            menu.setAttribute("class","bi bi-toggle-on");
+            document.getElementsByClassName("right-aside")[0].setAttribute("style","width:83%;");
+            document.getElementsByClassName("left-aside")[0].setAttribute("style","display:inline-block;width:17%")
+        }
+    
+    }
+}
 function settime() {
     var oDt=new Date();
     var sWd="";
@@ -88,7 +102,7 @@ function settime() {
     document.getElementById("displaydate").innerHTML="<span>"+
         oDt.getFullYear()+"年"+iMonth+"月"+oDt.getDate()+"日"+sWd+"</span>";
     // 定时器 每隔1000毫秒（1秒），调用showtime()函数 动态显示时间
-    var iTimerid = window.setInterval("showtime()",1000)
+    var iTimerid = window.setInterval("showtime()",1000);
 }
 function showtime() {
     var oDt=new Date();
@@ -115,16 +129,3 @@ function showtime() {
     document.getElementById("displaytime").innerHTML="<span>"+sTime+"</span>"
 }
 
-document.getElementById("menu-logo").onclick=function () {
-    var menu=document.getElementById("change-menu");
-    if(menu.getAttribute("class")=="bi bi-toggle-on"){
-        menu.setAttribute("class","bi bi-toggle-off");
-        document.getElementsByClassName("right-aside")[0].setAttribute("style","width:100%;");
-        document.getElementsByClassName("left-aside")[0].setAttribute("style","display:none;")
-    }else {
-        menu.setAttribute("class","bi bi-toggle-on");
-        document.getElementsByClassName("right-aside")[0].setAttribute("style","width:83%;");
-        document.getElementsByClassName("left-aside")[0].setAttribute("style","display:inline-block;width:17%")
-    }
-
-}

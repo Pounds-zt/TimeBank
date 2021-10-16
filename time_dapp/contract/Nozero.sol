@@ -49,6 +49,9 @@ contract Time{
     //  未审核，待报名，正在报名，待开始，正在进行，已结束，待确定，已确定，已取消
     enum ProjectState{ UNREVIEWED, WAITINGAPPLY, APPLYING, WAITINGSTART, UNDERWAY, FINISHED, WAITINGFIX, FIXED, CANCELED }
     
+    //  待审核，通过，未通过
+    enum ImpeachState{ UNREVIEWED, PASSED, UNPASSED }
+    
     // 用户数据结构
     struct User{
         // 用户下标
@@ -169,12 +172,14 @@ contract Time{
         uint ID;
         // 举报项目的编号
         uint projectID;
+        // 状态
+        ImpeachState state;
         // 提交者地址
-        address[]  sendAddress;
+        address[]  sendAddresses;
         // 举报理由
-        string[] reason;
+        string[] reasons;
         // 举报描述
-        string[] description;
+        string[] descriptions;
         // 投票结果 
         mapping(uint=>voteProject) voteImpeachApply;
         uint voteImpeachCount;
@@ -185,12 +190,14 @@ contract Time{
         uint ID;
         // 被举报的审核人的地址
         address impeachAddress;
+        // 状态
+        ImpeachState state;
         // 提交者地址
-        address[]  sendAddress;
+        address[]  sendAddresses;
         // 举报理由
-        string[] reason;
+        string[] reasons;
         // 举报描述
-        string[] description;
+        string[] descriptions;
         // 投票结果 
         mapping(uint=>voteProject) voteImpeachApply;
         uint voteImpeachCount;
@@ -203,11 +210,25 @@ contract Time{
         return impeachProjects.length;
     }
     
+    function getVoteImpeachProjectApplyReviewer(uint index1,uint index2)public view returns(address){
+        return projects[index1].voteProjectApply[index2].voteReviewer;
+    }
+    function getVoteImpeachProjectApplyResult(uint index1,uint index2)public view returns(int){
+        return projects[index1].voteProjectApply[index2].voteResult;
+    }
+    
     // 存储举报
     ImpeachReviewer[] public impeachReviewers;
     // 获取举报长度
     function getImpeachReviewerLength()public view returns(uint){
         return impeachReviewers.length;
+    }
+    
+     function getVoteImpeachReviewerApplyReviewer(uint index1,uint index2)public view returns(address){
+        return projects[index1].voteProjectApply[index2].voteReviewer;
+    }
+    function getVoteImpeachReviewerApplyResult(uint index1,uint index2)public view returns(int){
+        return projects[index1].voteProjectApply[index2].voteResult;
     }
     
     
@@ -271,6 +292,10 @@ contract Time{
 
         // 初始化预留项目
         Project memory project2;
+        
+        // ysy
+        project2.promoterAddress=msg.sender;
+        
         project2.ID=1;
         project2.name="测试项目1";
         project2.state=ProjectState.APPLYING;
@@ -454,6 +479,7 @@ contract Time{
             projects[projects.length-1].voteProjectApply[0] = _voteProject2; 
             projects[projects.length-1].voteProjectApplyCount = 1; 
         }
+        
     }
     
     // 发起人资格认证 (没用到，但是先留着)
@@ -523,48 +549,6 @@ contract Time{
         projects[ID].voteProjectResult[index]=voteProjectResult;
     }
     
-    // // 提交举报
-    // function setImpeach(uint projectID,address impeachAddress,string reason,string description)public returns(bool){
-    //     //判断该项目是否存在
-    //     require(projectID<projects.length,"error:该项目不存在!");
-
-    //     Project storage project=projects[projectID];
-
-    //     bool isProjectReviewer=false;
-    //     for(uint i=0;i<project.voteProjectResultCount;++i){
-    //         // 需要被举报的审核人是该项目的审核人
-    //         if(impeachAddress==project.voteProjectResult[i].voteReviewer){
-    //             isProjectReviewer=true;
-    //             // 要判断被举报人和被举报项目的举报记录是否已经存在
-    //             // 若不存在，则创建一条举报记录，若存在，则添加到该记录的举报理由和举报数组中
-    //             bool flag=false;
-    //             uint index;
-    //             for(uint x=0;x<impeachs.length;++x){
-    //                 if(impeachs[x].impeachAddress==impeachAddress && impeachs[x].projectID==projectID){
-    //                     flag=true;
-    //                     index=x;
-    //                 }
-    //             }
-    //             if(flag){
-    //                 impeachs[index].sendAddress.push(msg.sender);
-    //                 impeachs[index].reason.push(reason);
-    //                 impeachs[index].description.push(description);
-    //             }else{
-    //                 Impeach memory impeach;
-    //                 impeach.projectID=projectID;
-    //                 impeach.impeachAddress=impeachAddress;
-    //                 impeachs.push(impeach);
-    //                 impeachs[impeachs.length].sendAddress.push(msg.sender);
-    //                 impeachs[impeachs.length].reason.push(reason);
-    //                 impeachs[impeachs.length].description.push(description);
-    //             }
-    //             return true;
-    //         }
-    //     }
-    //     require(isProjectReviewer,"error:被举报的审核人不是该项目的审核人！");
-    // }
-    
-
     // ====================================工具方法====================================
 
     //bytes转string方法
@@ -674,6 +658,201 @@ contract Time{
         }
     }
     
+    
+    // ==================================投票========================================== 
+     function getPromoteProjects(address _address) public view returns(uint[] ids,uint promoteProjectscount){
+         uint[] memory promoteProjects0 = new uint[](projects.length);
+         uint count = 0;
+         for(uint i=1;i<projects.length;i++){
+             if(projects[i].promoterAddress == _address){
+                 promoteProjects0[count++] = projects[i].ID;
+             }
+         }
+         /*
+         uint[] memory promoteProjects = new uint[](count);
+         for(i=0;i<count;i++){
+            promoteProjects[i]=promoteProjects0[i];
+         }
+         */
+         return (promoteProjects0,count);
+     }
+     
+     function getJoinProjects(address _address) public view returns(uint[] ids,uint joinProjectscount){
+         uint[] memory joinProjects0 = new uint[](projects.length);
+         uint count = 0;
+         for(uint i=1;i<projects.length;i++){
+             for(uint j=0;j<projects[i].joinUsersCount;j++){
+                 if(projects[i].joinUsers[j].joinAddress == _address){
+                     joinProjects0[count++] = projects[i].ID;
+                     break;
+                 }
+             }
+         }
+          /*
+         uint[] memory joinProjects = new uint[](count);
+         for(i=0;i<count;i++){
+            joinProjects[i]=joinProjects0[i];
+         }
+         */
+         return (joinProjects0,count);
+     }
+     
+     
+     // ==================================举报========================================== 
+     // Reviewer
+     function submitImpeachReviewer(address _impeacheAddress,address _sendAddress,string _reason,string _description) public{
+        for(uint i=0;i<impeachReviewers.length;i++){
+            // 当已经存在该举报
+            if(impeachReviewers[i].impeachAddress==_impeacheAddress){
+                impeachReviewers[i].sendAddresses.push(_sendAddress);
+                impeachReviewers[i].reasons.push(_reason);
+                impeachReviewers[i].descriptions.push(_description);
+                
+                if(impeachReviewers[i].state==ImpeachState.UNPASSED){
+                    impeachReviewers[i].state=ImpeachState.UNREVIEWED;
+                    
+                     // 每次举报的时候初始化审核投票mapping
+                    // >=21 
+                    if((applyReviewer.length-1)>=REVIEWCOUNT){ 
+                        for(uint j=0;j<REVIEWCOUNT;j++){ 
+                            voteProject memory _voteProject; 
+                            _voteProject.voteReviewer = reviews[j+1]; 
+                            _voteProject.voteResult = 0; 
+                            impeachReviewers[i].voteImpeachApply[j] = _voteProject; 
+                        } 
+                        impeachReviewers[i].voteImpeachCount = REVIEWCOUNT; 
+                    }else{ 
+                        voteProject memory _voteProject2; 
+                        _voteProject2.voteReviewer = reviews[0]; 
+                        _voteProject2.voteResult = 0; 
+                        impeachReviewers[i].voteImpeachApply[0] = _voteProject2; 
+                        impeachReviewers[i].voteImpeachCount = 1; 
+                    }
+                    
+                }
+                return;
+            }
+        }
+
+        // 不存在该举报
+        address[] memory _sendAddresses;
+        _sendAddresses[0] = _sendAddress;
+        
+        string[] memory _reasons;
+        _reasons[0] = _reason;
+        
+        string[] memory _descriptions;
+        _descriptions[0] = _description;
+        
+        ImpeachReviewer memory impeachReviewer = ImpeachReviewer({
+            ID:impeachReviewers.length,
+            impeachAddress:_impeacheAddress,
+            state:ImpeachState.UNREVIEWED,
+            sendAddresses:_sendAddresses,
+            reasons:_reasons,
+            descriptions:_descriptions,
+            voteImpeachCount:0
+        });
+        
+        impeachReviewers.push(impeachReviewer);
+        
+        // 每次举报的时候初始化审核投票mapping
+        // >=21 
+        if((applyReviewer.length-1)>=REVIEWCOUNT){ 
+            for(i=0;i<REVIEWCOUNT;i++){ 
+                voteProject memory _voteProject3; 
+                _voteProject3.voteReviewer = reviews[i+1]; 
+                _voteProject3.voteResult = 0; 
+                impeachReviewers[impeachReviewers.length-1].voteImpeachApply[i] = _voteProject3; 
+            } 
+            impeachReviewers[impeachReviewers.length-1].voteImpeachCount = REVIEWCOUNT; 
+        }else{ 
+            voteProject memory _voteProject4; 
+            _voteProject4.voteReviewer = reviews[0]; 
+            _voteProject4.voteResult = 0; 
+            impeachReviewers[impeachReviewers.length-1].voteImpeachApply[0] = _voteProject4; 
+            impeachReviewers[impeachReviewers.length-1].voteImpeachCount = 1; 
+        }
+    }
+    
+     // Project
+    function submitImpeachProject(uint _projectID,address _sendAddress,string _reason,string _description) public{
+        for(uint i=0;i<impeachProjects.length;i++){
+            // 当已经存在该举报
+            if(impeachProjects[i].projectID==_projectID){
+                impeachProjects[i].sendAddresses.push(_sendAddress);
+                impeachProjects[i].reasons.push(_reason);
+                impeachProjects[i].descriptions.push(_description);
+                
+                if(impeachProjects[i].state==ImpeachState.UNPASSED){
+                    impeachProjects[i].state=ImpeachState.UNREVIEWED;
+                    
+                    // 每次举报的时候初始化审核投票mapping
+                    // >=21 
+                    if((applyReviewer.length-1)>=REVIEWCOUNT){ 
+                        for(uint j=0;j<REVIEWCOUNT;j++){ 
+                            voteProject memory _voteProject; 
+                            _voteProject.voteReviewer = reviews[j+1]; 
+                            _voteProject.voteResult = 0; 
+                            impeachProjects[i].voteImpeachApply[j] = _voteProject; 
+                        } 
+                        impeachProjects[i].voteImpeachCount = REVIEWCOUNT; 
+                    }else{ 
+                        voteProject memory _voteProject2; 
+                        _voteProject2.voteReviewer = reviews[0]; 
+                        _voteProject2.voteResult = 0; 
+                        impeachProjects[i].voteImpeachApply[0] = _voteProject2; 
+                        impeachProjects[i].voteImpeachCount = 1; 
+                    }
+                    
+                }
+                return;
+            }
+        }
+
+        // 不存在该举报
+        address[] memory _sendAddresses=new address[](1);
+        _sendAddresses[0] = _sendAddress;
+        
+        string[] memory _reasons=new string[](1);
+        _reasons[0] = _reason;
+        
+        string[] memory _descriptions=new string[](1);
+        _descriptions[0] = _description;
+        
+        ImpeachProject memory impeachProject = ImpeachProject({
+            ID:impeachReviewers.length,
+            projectID:_projectID,
+            state:ImpeachState.UNREVIEWED,
+            sendAddresses:_sendAddresses,
+            reasons:_reasons,
+            descriptions:_descriptions,
+            voteImpeachCount:0
+        });
+        
+        impeachProjects.push(impeachProject);
+        
+        
+        // 每次举报的时候初始化审核投票mapping
+        // >=21 
+        if((applyReviewer.length-1)>=REVIEWCOUNT){ 
+            for(i=0;i<REVIEWCOUNT;i++){ 
+                voteProject memory _voteProject3; 
+                _voteProject3.voteReviewer = reviews[i+1]; 
+                _voteProject3.voteResult = 0; 
+                impeachProjects[impeachProjects.length-1].voteImpeachApply[i] = _voteProject3; 
+            } 
+            impeachProjects[impeachProjects.length-1].voteImpeachCount = REVIEWCOUNT; 
+        }else{ 
+            voteProject memory _voteProject4; 
+            _voteProject4.voteReviewer = reviews[0]; 
+            _voteProject4.voteResult = 0; 
+            impeachProjects[impeachProjects.length-1].voteImpeachApply[0] = _voteProject4; 
+            impeachProjects[impeachProjects.length-1].voteImpeachCount = 1; 
+        }
+    }
+     
+    
     // ====================================个人测试代码====================================
     // 丽瑶的测试代码
     function getA() public view returns(uint a,uint b){
@@ -684,5 +863,3 @@ contract Time{
     
 
 }
-
-
